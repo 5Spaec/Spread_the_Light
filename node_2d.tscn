@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk7648c5h8jna"]
+[gd_scene load_steps=10 format=3 uid="uid://dk7648c5h8jna"]
 
 [ext_resource type="TileSet" uid="uid://dxrpch4jdj58y" path="res://Assets/Testing/Tileset.tres" id="1_81hox"]
 [ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="1_a6p2h"]
 [ext_resource type="Script" path="res://move.gd" id="2_uimys"]
 [ext_resource type="Script" path="res://MouseLook.gd" id="3_l0r8l"]
+[ext_resource type="Script" path="res://Light.gd" id="6_clrle"]
 [ext_resource type="Script" path="res://Button.gd" id="6_vx087"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1yq2"]
 size = Vector2(62, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mnwb"]
+size = Vector2(128, 130)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxaej"]
+radius = 60.0
 
 [node name="World" type="Node2D"]
 
@@ -23,39 +30,48 @@ layer_2/name = "Buildings"
 layer_2/tile_data = PackedInt32Array(393230, 589824, 2, 393231, 589824, 2, 393232, 589824, 2, -196605, 589824, 3, -196604, 589824, 3, -196603, 589824, 3, 458740, 589824, 4, 458741, 589824, 4, 458742, 589824, 4, 262138, 589824, 1342177284, 327674, 589824, 1342177284, 393210, 589824, 1342177284, 262136, 720896, 1610612739, 327672, 720896, 1610612739, 393208, 720896, 1610612739, 458744, 720896, 1610612739, -131078, 851968, 2, -131077, 851968, 2, -65527, 917504, 1, 589808, 851968, 0)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("2_uimys")
+speed = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_b1yq2")
 
-[node name="PlayerMove" type="Node2D" parent="CharacterBody2D/CollisionShape2D"]
-position = Vector2(0, -1)
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(14.434, 22.4384)
 scale = Vector2(0.498917, 0.498917)
-script = ExtResource("2_uimys")
-speed = 8
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D/CollisionShape2D/PlayerMove"]
-position = Vector2(28.9307, 44.9743)
-
-[node name="player" type="Sprite2D" parent="CharacterBody2D/CollisionShape2D/PlayerMove"]
-position = Vector2(-7.62939e-06, 2.00433)
-scale = Vector2(0.970853, 0.970853)
+[node name="player" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-3.80643e-06, 0.999994)
+scale = Vector2(0.484375, 0.484375)
 texture = ExtResource("1_a6p2h")
 script = ExtResource("3_l0r8l")
 
-[node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D/CollisionShape2D/PlayerMove/player"]
-position = Vector2(-7.89256e-06, 8.10623e-06)
-scale = Vector2(0.806452, 2.06452)
-target_position = Vector2(217.6, -1)
-
-[node name="Block" type="Sprite2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(265, -414)
+gravity_scale = 0.0
+
+[node name="Block" type="Sprite2D" parent="RigidBody2D"]
 texture = ExtResource("1_a6p2h")
 
-[node name="Button" type="Button" parent="Block"]
+[node name="Button" type="Button" parent="RigidBody2D/Block"]
 visibility_layer = 0
 offset_left = -60.2
 offset_top = -62.0
 offset_right = 61.8
 offset_bottom = 60.0
 script = ExtResource("6_vx087")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_3mnwb")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -303)
+script = ExtResource("6_clrle")
+
+[node name="Light" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.21875, 0.203125)
+texture = ExtResource("1_a6p2h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_uxaej")
