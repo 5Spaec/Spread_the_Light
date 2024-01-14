@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk7648c5h8jna"]
+[gd_scene load_steps=8 format=3 uid="uid://dk7648c5h8jna"]
 
 [ext_resource type="TileSet" uid="uid://dxrpch4jdj58y" path="res://Assets/Testing/Tileset.tres" id="1_81hox"]
 [ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="1_a6p2h"]
 [ext_resource type="Script" path="res://move.gd" id="2_uimys"]
 [ext_resource type="Script" path="res://MouseLook.gd" id="3_l0r8l"]
+[ext_resource type="Script" path="res://Block.gd" id="5_wfi8u"]
 [ext_resource type="Script" path="res://Button.gd" id="6_vx087"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1yq2"]
 size = Vector2(62, 62)
 
-[node name="World" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(4, 4)
@@ -51,6 +52,7 @@ target_position = Vector2(217.6, -1)
 [node name="Block" type="Sprite2D" parent="."]
 position = Vector2(265, -414)
 texture = ExtResource("1_a6p2h")
+script = ExtResource("5_wfi8u")
 
 [node name="Button" type="Button" parent="Block"]
 visibility_layer = 0

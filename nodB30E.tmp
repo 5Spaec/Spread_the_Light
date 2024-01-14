@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1yq2"]
 size = Vector2(62, 62)
 
-[node name="World" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(4, 4)
