@@ -10,8 +10,10 @@ func _pressed():
 			print("picked up")
 			picked = true
 			$"../..".reparent($"../../../CharacterBody2D/player")
+			$"../..".freeze = true
 	elif(picked == true):
 		print("put down")
 		picked = false
 		$"../..".reparent($"/root/World")
+		$"../..".freeze = false
 	pass

@@ -13,8 +13,8 @@ size = Vector2(62, 62)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3mnwb"]
 size = Vector2(128, 130)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uxaej"]
-radius = 60.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mq3m"]
+radius = 63.43
 
 [node name="World" type="Node2D"]
 
@@ -36,6 +36,7 @@ speed = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_b1yq2")
+debug_color = Color(0.67451, 0.380392, 0.85098, 0.419608)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(14.434, 22.4384)
@@ -49,7 +50,16 @@ script = ExtResource("3_l0r8l")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(265, -414)
+mass = 15.0
 gravity_scale = 0.0
+sleeping = true
+linear_damp = 7.05
+angular_damp = 3.776
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
+shape = SubResource("RectangleShape2D_3mnwb")
 
 [node name="Block" type="Sprite2D" parent="RigidBody2D"]
 texture = ExtResource("1_a6p2h")
@@ -64,14 +74,18 @@ script = ExtResource("6_vx087")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_3mnwb")
+debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, -303)
+[node name="Light" type="Area2D" parent="."]
+position = Vector2(-18, -300)
 script = ExtResource("6_clrle")
 
-[node name="Light" type="Sprite2D" parent="Area2D"]
-scale = Vector2(0.21875, 0.203125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light"]
+shape = SubResource("CircleShape2D_3mq3m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Light"]
+scale = Vector2(0.24, 0.24)
 texture = ExtResource("1_a6p2h")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_uxaej")
+[connection signal="area_entered" from="Light" to="Light" method="_on_area_entered"]
+[connection signal="area_exited" from="Light" to="Light" method="_on_area_exited"]

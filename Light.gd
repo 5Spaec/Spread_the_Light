@@ -10,6 +10,10 @@ func _ready():
 func _process(delta):
 	pass
 	
-func _body_enterend(area):
+func _on_area_entered(area):
 	print(area)
 	pass
+
+
+func _on_area_exited(area):
+	pass # Replace with function body.
