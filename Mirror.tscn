@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://k8jrhatg4mmy"]
+
+[ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="1_uxv4m"]
+[ext_resource type="Script" path="res://Button.gd" id="2_ucv73"]
+
+[node name="Mirror1" type="RigidBody2D"]
+mass = 15.0
+gravity_scale = 0.0
+sleeping = true
+linear_damp = 7.05
+angular_damp = 3.776
+script = ExtResource("2_ucv73")
+
+[node name="MirrorSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_uxv4m")
+
+[node name="MirrorClickDetect" type="Button" parent="MirrorSprite"]
+visibility_layer = 0
+offset_left = -60.2
+offset_top = -62.0
+offset_right = 61.8
+offset_bottom = 60.0
+
+[connection signal="pressed" from="MirrorSprite/MirrorClickDetect" to="." method="_on_mirror_click_detect_pressed"]

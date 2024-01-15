@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="Spread the Light"
-run/main_scene="res://node_2d.tscn"
+run/main_scene="res://Prototype.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Spread the Light"
+
+[layer_names]
+
+2d_physics/layer_2="Light"

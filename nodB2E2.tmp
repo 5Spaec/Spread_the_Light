@@ -4,17 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="1_a6p2h"]
 [ext_resource type="Script" path="res://move.gd" id="2_uimys"]
 [ext_resource type="Script" path="res://MouseLook.gd" id="3_l0r8l"]
-[ext_resource type="Script" path="res://Light.gd" id="6_clrle"]
-[ext_resource type="Script" path="res://Button.gd" id="6_vx087"]
+[ext_resource type="PackedScene" uid="uid://k8jrhatg4mmy" path="res://Mirror.tscn" id="5_cn8hv"]
+[ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://light_beam.tscn" id="6_jrlyw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1yq2"]
 size = Vector2(62, 62)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mnwb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04chh"]
 size = Vector2(128, 130)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3mq3m"]
-radius = 63.43
+radius = 87.0057
 
 [node name="World" type="Node2D"]
 
@@ -29,56 +29,39 @@ layer_1/tile_data = PackedInt32Array(458765, 524288, 7, -65539, 458752, 8, 26213
 layer_2/name = "Buildings"
 layer_2/tile_data = PackedInt32Array(393230, 589824, 2, 393231, 589824, 2, 393232, 589824, 2, -196605, 589824, 3, -196604, 589824, 3, -196603, 589824, 3, 458740, 589824, 4, 458741, 589824, 4, 458742, 589824, 4, 262138, 589824, 1342177284, 327674, 589824, 1342177284, 393210, 589824, 1342177284, 262136, 720896, 1610612739, 327672, 720896, 1610612739, 393208, 720896, 1610612739, 458744, 720896, 1610612739, -131078, 851968, 2, -131077, 851968, 2, -65527, 917504, 1, 589808, 851968, 0)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_uimys")
 speed = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_b1yq2")
 debug_color = Color(0.67451, 0.380392, 0.85098, 0.419608)
+script = ExtResource("3_l0r8l")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="playerSprite" type="Sprite2D" parent="Player/CollisionShape2D"]
+position = Vector2(-3.80643e-06, -6.02007e-06)
+scale = Vector2(0.484375, 0.484375)
+texture = ExtResource("1_a6p2h")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(14.434, 22.4384)
 scale = Vector2(0.498917, 0.498917)
 
-[node name="player" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(-3.80643e-06, 0.999994)
-scale = Vector2(0.484375, 0.484375)
-texture = ExtResource("1_a6p2h")
-script = ExtResource("3_l0r8l")
+[node name="Mirror1" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_cn8hv")]
+player = NodePath("../Player/CollisionShape2D")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(265, -414)
-mass = 15.0
-gravity_scale = 0.0
-sleeping = true
-linear_damp = 7.05
-angular_damp = 3.776
-
-[node name="Area2D" type="Area2D" parent="RigidBody2D"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
-shape = SubResource("RectangleShape2D_3mnwb")
-
-[node name="Block" type="Sprite2D" parent="RigidBody2D"]
-texture = ExtResource("1_a6p2h")
-
-[node name="Button" type="Button" parent="RigidBody2D/Block"]
-visibility_layer = 0
-offset_left = -60.2
-offset_top = -62.0
-offset_right = 61.8
-offset_bottom = 60.0
-script = ExtResource("6_vx087")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("RectangleShape2D_3mnwb")
+[node name="MirrorRigidCollide2" type="CollisionShape2D" parent="Mirror1"]
+shape = SubResource("RectangleShape2D_04chh")
 debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
+
+[node name="LightBeam" parent="Mirror1" instance=ExtResource("6_jrlyw")]
 
 [node name="Light" type="Area2D" parent="."]
 position = Vector2(-18, -300)
-script = ExtResource("6_clrle")
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light"]
 shape = SubResource("CircleShape2D_3mq3m")
@@ -86,6 +69,3 @@ shape = SubResource("CircleShape2D_3mq3m")
 [node name="Sprite2D" type="Sprite2D" parent="Light"]
 scale = Vector2(0.24, 0.24)
 texture = ExtResource("1_a6p2h")
-
-[connection signal="area_entered" from="Light" to="Light" method="_on_area_entered"]
-[connection signal="area_exited" from="Light" to="Light" method="_on_area_exited"]
