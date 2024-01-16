@@ -72,6 +72,7 @@ func getCollisionPoint():
 func putPoints(point1: Vector2, point2: Vector2):
 	call_deferred("enableRay")
 	self.add_point(point1, 0)
+	point2.y -= 10
 	self.add_point(point2, 1)
 	colissionRect.set_size(Vector2(100, abs(point2.y)))
 	$Area2D.set_position(Vector2(0, point2.y/2))

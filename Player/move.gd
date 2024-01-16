@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 @export var speed: int = 20;
 # Called when the node enters the scene tree for the first time.
@@ -7,13 +7,18 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
-		position.x += speed * delta
-	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
-		position.x -= speed * delta
-	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
-		position.y -= speed * delta
-	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
-		position.y += speed * delta
-	pass
+func _physics_process(delta):
+	var velocity = Vector2.ZERO # The player's movement vector.
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
+
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+	position += velocity * delta
+	move_and_slide()
