@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk7648c5h8jna"]
+[gd_scene load_steps=8 format=3 uid="uid://dk7648c5h8jna"]
 
 [ext_resource type="TileSet" uid="uid://dxrpch4jdj58y" path="res://Assets/Testing/Tileset.tres" id="1_l0llj"]
-[ext_resource type="Script" path="res://move.gd" id="2_eu0d5"]
+[ext_resource type="Script" path="res://Player/move.gd" id="2_eu0d5"]
 [ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="3_724av"]
-[ext_resource type="PackedScene" uid="uid://k8jrhatg4mmy" path="res://Mirror.tscn" id="4_re5sw"]
-[ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://light_beam.tscn" id="5_kte4l"]
+[ext_resource type="PackedScene" uid="uid://k8jrhatg4mmy" path="res://Mirror/Mirror.tscn" id="4_re5sw"]
+[ext_resource type="PackedScene" uid="uid://p1rg5xndouq8" path="res://Light/Light.tscn" id="5_ima65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1yq2"]
 size = Vector2(62, 62)
@@ -16,12 +16,6 @@ func _process(_delta):
 	look_at(get_global_mouse_position())
 	pass
 "
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_04chh"]
-size = Vector2(128, 130)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3mq3m"]
-radius = 87.0057
 
 [node name="World" type="Node2D"]
 
@@ -37,7 +31,6 @@ layer_2/name = "Buildings"
 layer_2/tile_data = PackedInt32Array(393230, 589824, 2, 393231, 589824, 2, 393232, 589824, 2, -196605, 589824, 3, -196604, 589824, 3, -196603, 589824, 3, 458740, 589824, 4, 458741, 589824, 4, 458742, 589824, 4, 262138, 589824, 1342177284, 327674, 589824, 1342177284, 393210, 589824, 1342177284, 262136, 720896, 1610612739, 327672, 720896, 1610612739, 393208, 720896, 1610612739, 458744, 720896, 1610612739, -131078, 851968, 2, -131077, 851968, 2, -65527, 917504, 1, 589808, 851968, 0)
 
 [node name="Player" type="CharacterBody2D" parent="."]
-unique_name_in_owner = true
 script = ExtResource("2_eu0d5")
 speed = 8
 
@@ -60,53 +53,4 @@ scale = Vector2(0.498917, 0.498917)
 position = Vector2(344, -362)
 player = NodePath("../Player/CollisionShape2D")
 
-[node name="MirrorRigidCollide2" type="CollisionShape2D" parent="Mirror1"]
-shape = SubResource("RectangleShape2D_04chh")
-debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
-
-[node name="LightBeam" parent="Mirror1" instance=ExtResource("5_kte4l")]
-
-[node name="Mirror2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_re5sw")]
-position = Vector2(146, -472)
-rotation = -0.523598
-player = NodePath("../Player/CollisionShape2D")
-
-[node name="MirrorRigidCollide2" type="CollisionShape2D" parent="Mirror2"]
-shape = SubResource("RectangleShape2D_04chh")
-debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
-
-[node name="LightBeam" parent="Mirror2" instance=ExtResource("5_kte4l")]
-
-[node name="Mirror3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_re5sw")]
-position = Vector2(-337, -374)
-rotation = -0.523598
-player = NodePath("../Player/CollisionShape2D")
-
-[node name="MirrorRigidCollide2" type="CollisionShape2D" parent="Mirror3"]
-shape = SubResource("RectangleShape2D_04chh")
-debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
-
-[node name="LightBeam" parent="Mirror3" instance=ExtResource("5_kte4l")]
-
-[node name="Mirror4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_re5sw")]
-position = Vector2(645, -328)
-rotation = 1.0472
-player = NodePath("../Player/CollisionShape2D")
-
-[node name="MirrorRigidCollide2" type="CollisionShape2D" parent="Mirror4"]
-shape = SubResource("RectangleShape2D_04chh")
-debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
-
-[node name="LightBeam" parent="Mirror4" instance=ExtResource("5_kte4l")]
-
-[node name="Light" type="Area2D" parent="."]
-position = Vector2(-18, -300)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Light"]
-shape = SubResource("CircleShape2D_3mq3m")
-
-[node name="Sprite2D" type="Sprite2D" parent="Light"]
-scale = Vector2(0.24, 0.24)
-texture = ExtResource("3_724av")
+[node name="Light" parent="." instance=ExtResource("5_ima65")]

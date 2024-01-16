@@ -1,0 +1,121 @@
+[gd_scene load_steps=27 format=3 uid="uid://p1rg5xndouq8"]
+
+[ext_resource type="Texture2D" uid="uid://cfoqxuvl8whea" path="res://Assets/GameTileset/Props/Light/0001.png" id="1_eamwr"]
+[ext_resource type="Texture2D" uid="uid://b6pav787t6r55" path="res://Assets/GameTileset/Props/Light/0002.png" id="2_80exb"]
+[ext_resource type="Texture2D" uid="uid://bnxtwb3otyii1" path="res://Assets/GameTileset/Props/Light/0003.png" id="3_jujkp"]
+[ext_resource type="Texture2D" uid="uid://bc8s4k58odtld" path="res://Assets/GameTileset/Props/Light/0004.png" id="4_jqlnh"]
+[ext_resource type="Texture2D" uid="uid://4kp25u00jjw3" path="res://Assets/GameTileset/Props/Light/0005.png" id="5_pm67e"]
+[ext_resource type="Texture2D" uid="uid://c6mxpgpjhm54o" path="res://Assets/GameTileset/Props/Light/0006.png" id="6_3jdne"]
+[ext_resource type="Texture2D" uid="uid://dk6y4g2mkvmob" path="res://Assets/GameTileset/Props/Light/0007.png" id="7_425ka"]
+[ext_resource type="Texture2D" uid="uid://biim82dkj0k6f" path="res://Assets/GameTileset/Props/Light/0008.png" id="8_niwub"]
+[ext_resource type="Texture2D" uid="uid://deb57beu8gkws" path="res://Assets/GameTileset/Props/Light/0009.png" id="9_ntfun"]
+[ext_resource type="Texture2D" uid="uid://dr0nbkaa75wac" path="res://Assets/GameTileset/Props/Light/0010.png" id="10_6wf0w"]
+[ext_resource type="Texture2D" uid="uid://1esu112uprcj" path="res://Assets/GameTileset/Props/Light/0011.png" id="11_htuvm"]
+[ext_resource type="Texture2D" uid="uid://dr7bhx1sepvrf" path="res://Assets/GameTileset/Props/Light/0012.png" id="12_vajq3"]
+[ext_resource type="Texture2D" uid="uid://qlh4o0k3lp5a" path="res://Assets/GameTileset/Props/Light/0013.png" id="13_7163c"]
+[ext_resource type="Texture2D" uid="uid://hkbumwkcemsn" path="res://Assets/GameTileset/Props/Light/0014.png" id="14_xv262"]
+[ext_resource type="Texture2D" uid="uid://dnnys0k5kgx45" path="res://Assets/GameTileset/Props/Light/0015.png" id="15_v50oh"]
+[ext_resource type="Texture2D" uid="uid://tvetiex5jqmr" path="res://Assets/GameTileset/Props/Light/0016.png" id="16_bv38q"]
+[ext_resource type="Texture2D" uid="uid://ds155ukpic63e" path="res://Assets/GameTileset/Props/Light/0017.png" id="17_dlgdy"]
+[ext_resource type="Texture2D" uid="uid://dpl23cjbeohet" path="res://Assets/GameTileset/Props/Light/0018.png" id="18_tkiw4"]
+[ext_resource type="Texture2D" uid="uid://b2luebnlj2kgn" path="res://Assets/GameTileset/Props/Light/0019.png" id="19_pa8nn"]
+[ext_resource type="Texture2D" uid="uid://cru1tdv21pjo8" path="res://Assets/GameTileset/Props/Light/0020.png" id="20_chswt"]
+[ext_resource type="Texture2D" uid="uid://bxdclrjnw1qxd" path="res://Assets/GameTileset/Props/Light/0021.png" id="21_8mta8"]
+[ext_resource type="Texture2D" uid="uid://dn561cmcq3d7g" path="res://Assets/GameTileset/Props/Light/0022.png" id="22_in1ca"]
+[ext_resource type="Texture2D" uid="uid://d2tuu7rrq1hfn" path="res://Assets/GameTileset/Props/Light/0023.png" id="23_6kvj6"]
+[ext_resource type="Texture2D" uid="uid://di8qix1qgtrh5" path="res://Assets/GameTileset/Props/Light/0024.png" id="24_eqaeb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mq3m"]
+radius = 87.0057
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s4rdg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_eamwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_80exb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jujkp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jqlnh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pm67e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3jdne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_425ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_niwub")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ntfun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6wf0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_htuvm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vajq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_7163c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xv262")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_v50oh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bv38q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_dlgdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_tkiw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_pa8nn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_chswt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_8mta8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_in1ca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_6kvj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_eqaeb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="Light" type="Area2D"]
+scale = Vector2(0.405, 0.405)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3mq3m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s4rdg")
+autoplay = "default"

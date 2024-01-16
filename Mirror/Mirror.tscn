@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://k8jrhatg4mmy"]
+
+[ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="2_5uiy1"]
+[ext_resource type="Script" path="res://Mirror/Button.gd" id="2_ucv73"]
+[ext_resource type="Texture2D" uid="uid://bcneqlrefxxti" path="res://Assets/GameTileset/Props/Mirror/mirrorUnlit.png" id="3_ubq8v"]
+[ext_resource type="Texture2D" uid="uid://ck2yet44vxxg3" path="res://Assets/GameTileset/Props/Mirror/mirrorLit.png" id="4_jegps"]
+[ext_resource type="Script" path="res://Mirror/changeMirrorSprite.gd" id="5_0630g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbg0h"]
+size = Vector2(30, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cumhl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ubq8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jegps")
+}],
+"loop": true,
+"name": &"lightOn",
+"speed": 5.0
+}]
+
+[node name="Mirror1" type="RigidBody2D"]
+mass = 15.0
+gravity_scale = 0.0
+sleeping = true
+linear_damp = 7.05
+angular_damp = 3.776
+script = ExtResource("2_ucv73")
+
+[node name="LightBeam" parent="." instance=ExtResource("2_5uiy1")]
+scale = Vector2(0.25, 0.25)
+
+[node name="MirrorRigidCollide2" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mbg0h")
+debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
+
+[node name="MirrorSprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_cumhl")
+animation = &"lightOn"
+script = ExtResource("5_0630g")
+
+[node name="MirrorClickDetect" type="Button" parent="MirrorSprite"]
+visibility_layer = 0
+offset_left = -60.0
+offset_top = -30.0
+offset_right = 59.0
+offset_bottom = 25.0
+
+[connection signal="entered_light" from="LightBeam" to="MirrorSprite" method="_on_light_beam_entered_light"]
+[connection signal="left_light" from="LightBeam" to="MirrorSprite" method="_on_light_beam_left_light"]
+[connection signal="animation_finished" from="MirrorSprite" to="MirrorSprite" method="_on_animation_finished"]
+[connection signal="pressed" from="MirrorSprite/MirrorClickDetect" to="." method="_on_mirror_click_detect_pressed"]
