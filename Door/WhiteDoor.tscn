@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://d25t1ndsje02x"]
+
+[ext_resource type="Texture2D" uid="uid://v1vuaod31o3m" path="res://Assets/GameTileset/Props/Door/WhiteDoor/WhiteDoorOff.png" id="1_7je6r"]
+[ext_resource type="Script" path="res://Door/WhiteDoor.gd" id="1_ll8e7"]
+[ext_resource type="Texture2D" uid="uid://cxmcpcl13qmgw" path="res://Assets/GameTileset/Props/Door/WhiteDoor/WhiteDoorOn.png" id="2_psa7a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88k6e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7je6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_psa7a")
+}],
+"loop": true,
+"name": &"White",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7a42d"]
+size = Vector2(64, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gwr1h"]
+size = Vector2(18, 19)
+
+[node name="WhiteDoor" type="Area2D"]
+scale = Vector2(1.5, 1.5)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ll8e7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_88k6e")
+animation = &"White"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="AnimatedSprite2D"]
+collision_mask = 0
+
+[node name="DoorShape" type="CollisionShape2D" parent="AnimatedSprite2D/StaticBody2D"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_7a42d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 8.5)
+shape = SubResource("RectangleShape2D_gwr1h")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

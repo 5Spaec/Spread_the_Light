@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2famh6iuv8q8"]
+
+[ext_resource type="Script" path="res://Win Plant/WinPlant.gd" id="1_36aa0"]
+[ext_resource type="Texture2D" uid="uid://sh4jfx8w1upg" path="res://Assets/GameTileset/Props/WinPlant/plant1.png" id="1_a7mve"]
+[ext_resource type="Texture2D" uid="uid://vqtf5fvdl16p" path="res://Assets/GameTileset/Props/WinPlant/plant2.png" id="2_4v314"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_byg8w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a7mve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4v314")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0dsv"]
+size = Vector2(24, 37)
+
+[node name="Plant" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_36aa0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_byg8w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_x0dsv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
