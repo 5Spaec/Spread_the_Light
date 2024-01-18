@@ -121,7 +121,7 @@ fill_to = Vector2(0.5, 0.985)
 [node name="Light" type="Area2D"]
 scale = Vector2(0.405, 0.405)
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3mq3m")
