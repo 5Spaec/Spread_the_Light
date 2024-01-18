@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://p1rg5xndouq8"]
+[gd_scene load_steps=29 format=3 uid="uid://p1rg5xndouq8"]
 
 [ext_resource type="Texture2D" uid="uid://cfoqxuvl8whea" path="res://Assets/GameTileset/Props/Light/0001.png" id="1_eamwr"]
 [ext_resource type="Texture2D" uid="uid://b6pav787t6r55" path="res://Assets/GameTileset/Props/Light/0002.png" id="2_80exb"]
@@ -108,6 +108,16 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_h8ba8"]
+offsets = PackedFloat32Array(0.397661, 0.654971)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mbhkk"]
+gradient = SubResource("Gradient_h8ba8")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.985)
+
 [node name="Light" type="Area2D"]
 scale = Vector2(0.405, 0.405)
 collision_layer = 2
@@ -119,3 +129,8 @@ shape = SubResource("CircleShape2D_3mq3m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s4rdg")
 autoplay = "default"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(4.08873, 3.68364)
+texture = SubResource("GradientTexture2D_mbhkk")
+texture_scale = 1.69

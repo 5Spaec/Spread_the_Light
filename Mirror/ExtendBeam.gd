@@ -3,6 +3,8 @@ extends Line2D
 @export var raycast: RayCast2D
 @export var raycastTip: Node2D
 @export var LightCollision: CollisionShape2D
+@onready var pointLight: PointLight2D = $PointLight2D
+@onready var particle: GPUParticles2D = $PointLight2D/GPUParticles2D
 var inLight = false
 var collide = false
 var colissionRect: RectangleShape2D = RectangleShape2D.new()
@@ -50,6 +52,9 @@ func _on_mirror_detect_2_area_exited(area):
 
 func reset():
 	self.clear_points()
+	pointLight.scale = Vector2(0, 0)
+	pointLight.position = Vector2(0, 0)
+	particle.set_emitting(false)
 
 func disableRay():
 	LightCollision.disabled = true
@@ -74,5 +79,15 @@ func putPoints(point1: Vector2, point2: Vector2):
 	self.add_point(point1, 0)
 	point2.y -= 10
 	self.add_point(point2, 1)
+	#lights
+	pointLight.scale = Vector2(abs(point2.y)/1000, 1)
+	pointLight.position = Vector2(0, point2.y/2)
+	
+	#particles
+	particle.scale = Vector2(abs(point2.y)/1000, 0.5)
+	#particle.position = Vector2(point2.y/2, point2.y/2)
+	
+	#rect
 	colissionRect.set_size(Vector2(100, abs(point2.y)))
 	$Area2D.set_position(Vector2(0, point2.y/2))
+	particle.set_emitting(true)
