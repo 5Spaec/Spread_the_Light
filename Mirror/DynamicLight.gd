@@ -20,21 +20,23 @@ func _ready():
 		add_child(ray)
 		ray.target_position = (Vector2(0, -rayLength))
 		ray.enabled = true
-		ray.collide_with_areas = true
+		ray.hit_from_inside = true
+		#ray.collide_with_areas = true
+		#ray.set_collision_mask_value(1, true)
+		#ray.set_collision_mask_value(2, true)
 		rays.append(ray)
 	points[rayAmount] = rays[-1].position
 	points[rayAmount + 1] = rays[0].position
 	stopEffects()
-	pass # Replace with function body.
+	clearShapes()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	maxRayDist = 0
 	if inLight:
 		for i: int in range(rayAmount):
 			# checks for if the ray is colliding and is in the light if not then the light should turn off
-			rays[i].force_raycast_update()
 			if rays[i].is_colliding():
 				points[i] = to_local(rays[i].get_collision_point())
 			# for some reason in godot whenever a ray does not hit anything it returns 0 0 so this is here just incase a 0 0 is returned
@@ -43,7 +45,7 @@ func _process(delta):
 			# this gets the longest ray so that we can determine how far to push the light later
 			if(abs(points[i].y) > maxRayDist):
 				maxRayDist = abs(points[i].y)
-		print(maxRayDist)
+		#print(maxRayDist)
 		# sets the shape of the light and the collisionbox to be the same as the points defined earlier	
 		self.set_polygon(points)
 		collisionShape.set_polygon(points)
@@ -52,14 +54,16 @@ func _process(delta):
 	else:
 		clearShapes()
 		stopEffects()
-	pass
-	
+		
 # the way the next 2 functions work is that if an area is entered it is added to an array
 # once any area is exited, the last item in the array is removed
 # this is important because it fixes a bug where lights will stop shining if they exit one area and are still in another area
+signal turnon
 var enteredAreas = [];
 func _on_mirror_detect_2_area_entered(area):
+	print("EnteredLight")
 	enteredAreas.append(area)
+	turnon.emit()
 	inLight = true
 
 signal turnoff
@@ -77,8 +81,8 @@ func drawEffects(dist):
 	pointLight.position = Vector2(0, -dist/2)
 	
 	# particles
-	particle.set_emitting(true)
 	particle.scale = Vector2(dist/1000, 0.5)
+	particle.set_emitting(true)
 	#particle.position = Vector2(dist, 0)
 	
 
@@ -92,6 +96,8 @@ func stopEffects():
 
 func clearShapes():
 	collisionShape.disabled = true
+	self.visible = false
 
 func startShapes():
 	collisionShape.disabled = false
+	self.visible = true

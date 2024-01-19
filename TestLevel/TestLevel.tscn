@@ -965,15 +965,12 @@ layer_1/tile_data = PackedInt32Array(-196608, 65536, 0, -131072, 65536, 1, -6553
 [node name="Mirror1" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_jmmg0")]
 z_index = 2
 position = Vector2(101, 36)
-collision_layer = 4
-mass = 1.3
 player = NodePath("../Player/CollisionShape2D")
 
 [node name="Mirror2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_jmmg0")]
 z_index = 2
 position = Vector2(299, 70)
 rotation = -3.14159
-collision_layer = 4
 player = NodePath("../Player/CollisionShape2D")
 
 [node name="Light" parent="." instance=ExtResource("4_6f8r3")]
