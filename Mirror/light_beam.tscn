@@ -1,12 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://birtquyc6le8e"]
+[gd_scene load_steps=9 format=3 uid="uid://birtquyc6le8e"]
 
 [ext_resource type="Script" path="res://Mirror/enteredLightSignal.gd" id="1_aw0ck"]
-[ext_resource type="Script" path="res://Mirror/ExtendBeam.gd" id="1_y6tt8"]
+[ext_resource type="Texture2D" uid="uid://d002taxui77qx" path="res://Assets/GameTileset/Props/LightGradient/LightGradient.png" id="3_dpn72"]
+[ext_resource type="Texture2D" uid="uid://cfoqxuvl8whea" path="res://Assets/GameTileset/Props/Light/0001.png" id="4_xelpd"]
+[ext_resource type="Script" path="res://Mirror/DynamicLight.gd" id="5_ha2pq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ygnsu"]
 size = Vector2(118, 56)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r68y2"]
+[sub_resource type="Curve" id="Curve_l1kal"]
+_data = [Vector2(0, 0.791209), 0.0, 0.349555, 0, 0, Vector2(0.137725, 1), 0.0, 0.0, 0, 0, Vector2(0.676647, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_4f1nj"]
+curve = SubResource("Curve_l1kal")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2xbwj"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-500, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1000, 200, 1)
+spread = 0.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+damping_max = 13.635
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_4f1nj")
+hue_variation_min = -0.02
+turbulence_enabled = true
+turbulence_noise_strength = 2.55
+turbulence_noise_speed = Vector3(0, 0.125, 0)
 
 [node name="LightBeam" type="Node2D"]
 script = ExtResource("1_aw0ck")
@@ -18,29 +44,34 @@ collision_mask = 2
 [node name="MirrorDetectArea" type="CollisionShape2D" parent="MirrorDetect2"]
 shape = SubResource("RectangleShape2D_ygnsu")
 
-[node name="MirrorLightBeam2" type="Line2D" parent="." node_paths=PackedStringArray("raycast", "raycastTip", "LightCollision")]
+[node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(0, -39)
-width = 100.0
-script = ExtResource("1_y6tt8")
-raycast = NodePath("MirrorRay2")
-raycastTip = NodePath("MirrorRay2/MirrorRayTip")
-LightCollision = NodePath("Area2D/CollisionShape2D")
+color = Color(0.831373, 0.584314, 0.952941, 0.309804)
+script = ExtResource("5_ha2pq")
 
-[node name="Area2D" type="Area2D" parent="MirrorLightBeam2"]
+[node name="Area2D" type="Area2D" parent="Polygon2D"]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MirrorLightBeam2/Area2D"]
-shape = SubResource("RectangleShape2D_r68y2")
-debug_color = Color(0.47451, 0.588235, 0, 0.419608)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D/Area2D"]
+one_way_collision_margin = 0.0
 
-[node name="MirrorRay2" type="RayCast2D" parent="MirrorLightBeam2"]
-target_position = Vector2(0, -1000)
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -39)
+rotation = 1.5708
+color = Color(0.933333, 0.74902, 0.964706, 1)
+texture = ExtResource("3_dpn72")
 
-[node name="MirrorRayTip" type="Node2D" parent="MirrorLightBeam2/MirrorRay2"]
-position = Vector2(0, -1000)
+[node name="GPUParticles2D" type="GPUParticles2D" parent="PointLight2D"]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_2xbwj")
+texture = ExtResource("4_xelpd")
+lifetime = 3.0
+randomness = 0.19
 
 [connection signal="area_entered" from="MirrorDetect2" to="." method="_on_mirror_detect_2_area_entered"]
-[connection signal="area_entered" from="MirrorDetect2" to="MirrorLightBeam2" method="_on_mirror_detect_2_area_entered"]
-[connection signal="area_exited" from="MirrorDetect2" to="MirrorLightBeam2" method="_on_mirror_detect_2_area_exited"]
-[connection signal="turnoff" from="MirrorLightBeam2" to="." method="_on_mirror_light_beam_2_turnoff"]
+[connection signal="area_entered" from="MirrorDetect2" to="Polygon2D" method="_on_mirror_detect_2_area_entered"]
+[connection signal="area_exited" from="MirrorDetect2" to="Polygon2D" method="_on_mirror_detect_2_area_exited"]
+[connection signal="turnoff" from="Polygon2D" to="." method="_on_polygon_2d_turnoff"]
+[connection signal="turnon" from="Polygon2D" to="." method="_on_polygon_2d_turnon"]

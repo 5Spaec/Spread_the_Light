@@ -3,7 +3,6 @@ extends RigidBody2D
 @export var player: Node2D
 @export var distance: int = 30
 var picked = false
-
 func _on_mirror_click_detect_pressed():
 	print("clicked")
 	if(picked == false):
