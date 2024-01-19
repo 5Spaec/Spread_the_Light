@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d1bud5qdomvxw"]
+[gd_scene load_steps=22 format=3 uid="uid://d1bud5qdomvxw"]
 
 [ext_resource type="Script" path="res://TestLevel/LevelHandler.gd" id="1_78gb4"]
 [ext_resource type="Texture2D" uid="uid://nccy4rnj6yl7" path="res://Assets/GameTileset/Environment/Tiles.png" id="2_riplq"]
@@ -7,7 +7,12 @@
 [ext_resource type="Script" path="res://Player/move.gd" id="5_avy7q"]
 [ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="6_xorkv"]
 [ext_resource type="PackedScene" uid="uid://c2famh6iuv8q8" path="res://Win Plant/WinPlant.tscn" id="7_7rc7f"]
+[ext_resource type="Texture2D" uid="uid://3b4tuhy37vay" path="res://Assets/GUI Icons/Settings/Settings1.png" id="7_kj3ej"]
+[ext_resource type="Texture2D" uid="uid://cplhtl8onpx4i" path="res://Assets/GUI Icons/Settings/Settings2.png" id="8_8f2mo"]
 [ext_resource type="PackedScene" uid="uid://d25t1ndsje02x" path="res://Door/WhiteDoor.tscn" id="8_f6ti6"]
+[ext_resource type="Script" path="res://Menus/SettingsButton.gd" id="9_6s0wv"]
+[ext_resource type="PackedScene" uid="uid://dcsid4sp65dqs" path="res://Menus/settings_pannel.tscn" id="11_usofo"]
+[ext_resource type="Script" path="res://TestLevel/LevelLightGrid.gd" id="13_yr6hf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_543gr"]
 
@@ -977,6 +982,7 @@ player = NodePath("../Player/CollisionShape2D")
 position = Vector2(71, 77)
 
 [node name="Player" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(77, 61)
 scale = Vector2(0.36, 0.36)
 script = ExtResource("5_avy7q")
@@ -1027,4 +1033,39 @@ visible = false
 color = Color(0, 0, 0, 1)
 blend_mode = 2
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Settings Button" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("pannel")]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("9_6s0wv")
+pannel = NodePath("../Settings Pannel")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Settings Button"]
+layout_mode = 1
+offset_left = -80.0
+offset_top = 25.0
+offset_right = -48.0
+offset_bottom = 57.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("7_kj3ej")
+texture_pressed = ExtResource("7_kj3ej")
+texture_hover = ExtResource("8_8f2mo")
+
+[node name="Settings Pannel" parent="CanvasLayer" instance=ExtResource("11_usofo")]
+visible = false
+
+[node name="LevelLightGrid" type="Area2D" parent="."]
+script = ExtResource("13_yr6hf")
+
+[node name="LevelLightShape" type="CollisionPolygon2D" parent="LevelLightGrid"]
+polygon = PackedVector2Array(0, -1, 369, -1, 369, 272, 224, 273, 225, 176, 192, 176, 192, 144, 0, 144)
+
 [connection signal="plantOn" from="WinPlant" to="." method="_on_win_plant_plant_on"]
+[connection signal="pressed" from="CanvasLayer/Settings Button/TextureButton" to="CanvasLayer/Settings Button" method="_on_texture_button_pressed"]
