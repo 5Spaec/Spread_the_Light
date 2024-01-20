@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d1bud5qdomvxw"]
+[gd_scene load_steps=23 format=3 uid="uid://d1bud5qdomvxw"]
 
 [ext_resource type="Script" path="res://TestLevel/LevelHandler.gd" id="1_78gb4"]
 [ext_resource type="Texture2D" uid="uid://nccy4rnj6yl7" path="res://Assets/GameTileset/Environment/Tiles.png" id="2_riplq"]
@@ -12,9 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://d25t1ndsje02x" path="res://Door/WhiteDoor.tscn" id="8_f6ti6"]
 [ext_resource type="Script" path="res://Menus/SettingsButton.gd" id="9_6s0wv"]
 [ext_resource type="PackedScene" uid="uid://dcsid4sp65dqs" path="res://Menus/settings_pannel.tscn" id="11_usofo"]
-[ext_resource type="Texture2D" uid="uid://ckw4ah054mkl" path="res://Assets/GameTileset/Props/RotatePlantIcons/spinnyPlant.png" id="13_pyw3j"]
-[ext_resource type="Script" path="res://TestLevel/PlantSpin.gd" id="14_we41j"]
-[ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="15_2sj7v"]
+[ext_resource type="Script" path="res://TestLevel/LevelLightGrid.gd" id="13_yr6hf"]
+[ext_resource type="PackedScene" uid="uid://c611vcbb0cej6" path="res://Light/light_detect_area.tscn" id="14_yx5pr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_543gr"]
 
@@ -952,79 +951,6 @@ glow_strength = 2.0
 glow_bloom = 0.19
 glow_blend_mode = 0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_box32"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(128, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vf58j"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jue5"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_528de"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_npdxe"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rkpni"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s05xn"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qdjc6"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ej2x"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ess5n"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_box32")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vf58j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1jue5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_528de")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_npdxe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rkpni")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s05xn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qdjc6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0ej2x")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uom5u"]
-
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_78gb4")
 
@@ -1140,31 +1066,17 @@ texture_hover = ExtResource("8_8f2mo")
 [node name="Settings Pannel" parent="CanvasLayer" instance=ExtResource("11_usofo")]
 visible = false
 
-[node name="SpinnyPlant" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
-z_index = 2
-position = Vector2(131, 85)
-sprite_frames = SubResource("SpriteFrames_ess5n")
-script = ExtResource("14_we41j")
-player = NodePath("../Player")
-distance = 60
+[node name="LevelLightGrid" type="Area2D" parent="."]
+script = ExtResource("13_yr6hf")
 
-[node name="LightBeam" parent="SpinnyPlant" instance=ExtResource("15_2sj7v")]
+[node name="LevelLightShape" type="CollisionPolygon2D" parent="LevelLightGrid"]
+visible = false
+polygon = PackedVector2Array(0, -1, 369, -1, 369, 272, 224, 273, 225, 176, 192, 176, 192, 144, 0, 144)
 
-[node name="SpinnyClickDetect" type="Button" parent="SpinnyPlant"]
-visibility_layer = 0
-offset_left = -7.0
-offset_top = -9.0
-offset_right = 6.0
-offset_bottom = 4.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinnyPlant"]
-shape = SubResource("RectangleShape2D_uom5u")
+[node name="LightDetectArea" parent="LevelLightGrid" instance=ExtResource("14_yx5pr")]
 
 [connection signal="plantOff" from="WinPlant" to="." method="_on_win_plant_plant_off"]
 [connection signal="plantOn" from="WinPlant" to="." method="_on_win_plant_plant_on"]
 [connection signal="plantOff" from="WinPlant2" to="." method="_on_win_plant_plant_off"]
 [connection signal="plantOn" from="WinPlant2" to="." method="_on_win_plant_plant_on"]
 [connection signal="pressed" from="CanvasLayer/Settings Button/TextureButton" to="CanvasLayer/Settings Button" method="_on_texture_button_pressed"]
-[connection signal="entered_light" from="SpinnyPlant/LightBeam" to="SpinnyPlant" method="_on_light_beam_entered_light"]
-[connection signal="left_light" from="SpinnyPlant/LightBeam" to="SpinnyPlant" method="_on_light_beam_left_light"]
-[connection signal="pressed" from="SpinnyPlant/SpinnyClickDetect" to="SpinnyPlant" method="_on_spinny_click_detect_pressed"]
