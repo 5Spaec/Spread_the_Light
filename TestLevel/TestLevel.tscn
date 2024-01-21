@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d1bud5qdomvxw"]
+[gd_scene load_steps=37 format=3 uid="uid://d1bud5qdomvxw"]
 
 [ext_resource type="Script" path="res://TestLevel/LevelHandler.gd" id="1_78gb4"]
 [ext_resource type="Texture2D" uid="uid://nccy4rnj6yl7" path="res://Assets/GameTileset/Environment/Tiles.png" id="2_riplq"]
@@ -7,7 +7,15 @@
 [ext_resource type="Script" path="res://Player/move.gd" id="5_avy7q"]
 [ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="6_xorkv"]
 [ext_resource type="PackedScene" uid="uid://c2famh6iuv8q8" path="res://Win Plant/WinPlant.tscn" id="7_7rc7f"]
+[ext_resource type="Texture2D" uid="uid://3b4tuhy37vay" path="res://Assets/GUI Icons/Settings/Settings1.png" id="7_kj3ej"]
+[ext_resource type="AudioStream" uid="uid://bcuoeef5ydpyr" path="res://Assets/Audio/HeartBeat.mp3" id="7_ovqb1"]
+[ext_resource type="Texture2D" uid="uid://cplhtl8onpx4i" path="res://Assets/GUI Icons/Settings/Settings2.png" id="8_8f2mo"]
 [ext_resource type="PackedScene" uid="uid://d25t1ndsje02x" path="res://Door/WhiteDoor.tscn" id="8_f6ti6"]
+[ext_resource type="Script" path="res://Menus/SettingsButton.gd" id="9_6s0wv"]
+[ext_resource type="PackedScene" uid="uid://dcsid4sp65dqs" path="res://Menus/settings_pannel.tscn" id="11_usofo"]
+[ext_resource type="Texture2D" uid="uid://ckw4ah054mkl" path="res://Assets/GameTileset/Props/RotatePlantIcons/spinnyPlant.png" id="13_pyw3j"]
+[ext_resource type="Script" path="res://TestLevel/PlantSpin.gd" id="14_we41j"]
+[ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="15_2sj7v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_543gr"]
 
@@ -938,12 +946,88 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0.985)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pc0c"]
+size = Vector2(16, 16)
+
 [sub_resource type="Environment" id="Environment_j817b"]
 glow_enabled = true
 glow_intensity = 1.03
 glow_strength = 2.0
 glow_bloom = 0.19
 glow_blend_mode = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_box32"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vf58j"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jue5"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_528de"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npdxe"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkpni"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s05xn"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdjc6"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ej2x"]
+atlas = ExtResource("13_pyw3j")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ess5n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_box32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vf58j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jue5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_528de")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npdxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkpni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s05xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdjc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ej2x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uom5u"]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_78gb4")
@@ -976,11 +1060,14 @@ player = NodePath("../Player/CollisionShape2D")
 [node name="Light" parent="." instance=ExtResource("4_6f8r3")]
 position = Vector2(71, 77)
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "audio")]
+unique_name_in_owner = true
 position = Vector2(77, 61)
 scale = Vector2(0.36, 0.36)
 script = ExtResource("5_avy7q")
-speed = 60
+speed = 40
+camera = NodePath("Camera2D")
+audio = NodePath("AudioStreamPlayer2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 1)
@@ -1002,8 +1089,21 @@ zoom = Vector2(3.885, 3.885)
 position = Vector2(0, -7.62939e-06)
 texture = SubResource("GradientTexture2D_rpprk")
 
-[node name="WinPlant" parent="." instance=ExtResource("7_7rc7f")]
+[node name="PlayerMirrorDetect" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="PlayerMirrorCollision" type="CollisionShape2D" parent="Player/PlayerMirrorDetect"]
+shape = SubResource("RectangleShape2D_2pc0c")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("7_ovqb1")
+
+[node name="WinPlant" parent="." groups=["winPlants"] instance=ExtResource("7_7rc7f")]
 position = Vector2(299, 230)
+
+[node name="WinPlant2" parent="." groups=["winPlants"] instance=ExtResource("7_7rc7f")]
+position = Vector2(199, 68)
 
 [node name="WhiteDoor" parent="." instance=ExtResource("8_f6ti6")]
 position = Vector2(299, 181)
@@ -1023,8 +1123,65 @@ text = "You Win!!!"
 environment = SubResource("Environment_j817b")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 color = Color(0, 0, 0, 1)
 blend_mode = 2
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Settings Button" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("pannel")]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("9_6s0wv")
+pannel = NodePath("../Settings Pannel")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Settings Button"]
+layout_mode = 1
+offset_left = -80.0
+offset_top = 25.0
+offset_right = -48.0
+offset_bottom = 57.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("7_kj3ej")
+texture_pressed = ExtResource("7_kj3ej")
+texture_hover = ExtResource("8_8f2mo")
+
+[node name="Settings Pannel" parent="CanvasLayer" instance=ExtResource("11_usofo")]
+visible = false
+
+[node name="SpinnyPlant" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+z_index = 2
+position = Vector2(131, 85)
+sprite_frames = SubResource("SpriteFrames_ess5n")
+script = ExtResource("14_we41j")
+player = NodePath("../Player")
+distance = 60
+
+[node name="LightBeam" parent="SpinnyPlant" instance=ExtResource("15_2sj7v")]
+
+[node name="SpinnyClickDetect" type="Button" parent="SpinnyPlant"]
+visibility_layer = 0
+offset_left = -7.0
+offset_top = -9.0
+offset_right = 6.0
+offset_bottom = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinnyPlant"]
+shape = SubResource("RectangleShape2D_uom5u")
+
+[connection signal="area_entered" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_entered"]
+[connection signal="area_exited" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_exited"]
+[connection signal="plantOff" from="WinPlant" to="." method="_on_win_plant_plant_off"]
 [connection signal="plantOn" from="WinPlant" to="." method="_on_win_plant_plant_on"]
+[connection signal="plantOff" from="WinPlant2" to="." method="_on_win_plant_plant_off"]
+[connection signal="plantOn" from="WinPlant2" to="." method="_on_win_plant_plant_on"]
+[connection signal="pressed" from="CanvasLayer/Settings Button/TextureButton" to="CanvasLayer/Settings Button" method="_on_texture_button_pressed"]
+[connection signal="interacting" from="SpinnyPlant" to="Player" method="_on_spinny_plant_interacting"]
+[connection signal="entered_light" from="SpinnyPlant/LightBeam" to="SpinnyPlant" method="_on_light_beam_entered_light"]
+[connection signal="left_light" from="SpinnyPlant/LightBeam" to="SpinnyPlant" method="_on_light_beam_left_light"]
+[connection signal="pressed" from="SpinnyPlant/SpinnyClickDetect" to="SpinnyPlant" method="_on_spinny_click_detect_pressed"]

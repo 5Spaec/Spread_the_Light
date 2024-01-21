@@ -1,7 +1,7 @@
 extends Polygon2D
 
-@export var rayAmount: int = 30
-@export var lightWidth: int = 90
+@export var rayAmount: int = 10
+@export var lightWidth: int = 20
 @export var rayLength: int = 1000
 @onready var collisionShape: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 @onready var pointLight: PointLight2D = $"../PointLight2D"
@@ -16,8 +16,8 @@ func _ready():
 	points.resize(rayAmount+2)
 	for i in range(rayAmount):
 		var ray: RayCast2D = RayCast2D.new()
-		ray.position = (Vector2(-lightWidth + (spreadDist * i) + (lightWidth/2), 0))
 		add_child(ray)
+		ray.position = (Vector2((-(lightWidth/2)) + (spreadDist * i) + spreadDist/2, 0))
 		ray.target_position = (Vector2(0, -rayLength))
 		ray.enabled = true
 		ray.hit_from_inside = true
@@ -77,7 +77,7 @@ func _on_mirror_detect_2_area_exited(area):
 # simple functions to draw and stop drawing particeles and such to the screen
 func drawEffects(dist):
 	# lights
-	pointLight.scale = Vector2((dist/1000), 1)
+	pointLight.scale = Vector2((dist/1000), 0.23)
 	pointLight.position = Vector2(0, -dist/2)
 	
 	# particles

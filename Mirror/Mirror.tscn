@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Mirror/changeMirrorSprite.gd" id="5_0630g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbg0h"]
-size = Vector2(30, 14)
+size = Vector2(16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cumhl"]
 animations = [{
@@ -34,7 +34,6 @@ angular_damp = 3.776
 script = ExtResource("2_ucv73")
 
 [node name="LightBeam" parent="." instance=ExtResource("2_5uiy1")]
-scale = Vector2(0.25, 0.25)
 
 [node name="MirrorRigidCollide2" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mbg0h")
@@ -42,7 +41,7 @@ debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
 
 [node name="MirrorSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.125, 0.25)
 sprite_frames = SubResource("SpriteFrames_cumhl")
 animation = &"lightOn"
 script = ExtResource("5_0630g")
