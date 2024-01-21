@@ -47,6 +47,8 @@ func _physics_process(delta):
 				maxRayDist = abs(points[i].y)
 		#print(maxRayDist)
 		# sets the shape of the light and the collisionbox to be the same as the points defined earlier	
+		points[rayAmount] = rays[-1].position
+		points[rayAmount + 1] = rays[0].position
 		self.set_polygon(points)
 		collisionShape.set_polygon(points)
 		drawEffects(maxRayDist)
