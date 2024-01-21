@@ -30,3 +30,4 @@ func _on_win_plant_plant_off():
 	plantsLit.emit(plantLitNum)
 	print("Emiited plantnum:",plantLitNum)
 	pass
+
