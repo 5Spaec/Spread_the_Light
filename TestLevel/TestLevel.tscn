@@ -1,21 +1,25 @@
-[gd_scene load_steps=37 format=3 uid="uid://d1bud5qdomvxw"]
+[gd_scene load_steps=47 format=3 uid="uid://d1bud5qdomvxw"]
 
 [ext_resource type="Script" path="res://TestLevel/LevelHandler.gd" id="1_78gb4"]
 [ext_resource type="Texture2D" uid="uid://nccy4rnj6yl7" path="res://Assets/GameTileset/Environment/Tiles.png" id="2_riplq"]
 [ext_resource type="PackedScene" uid="uid://k8jrhatg4mmy" path="res://Mirror/Mirror.tscn" id="3_jmmg0"]
 [ext_resource type="PackedScene" uid="uid://p1rg5xndouq8" path="res://Light/Light.tscn" id="4_6f8r3"]
 [ext_resource type="Script" path="res://Player/move.gd" id="5_avy7q"]
-[ext_resource type="Texture2D" uid="uid://dho8e4oecocvm" path="res://icon.svg" id="6_xorkv"]
+[ext_resource type="Texture2D" uid="uid://k1f762nncfpm" path="res://Assets/GameTileset/Custom_TileSet/Character Sprite.png" id="6_03wak"]
 [ext_resource type="PackedScene" uid="uid://c2famh6iuv8q8" path="res://Win Plant/WinPlant.tscn" id="7_7rc7f"]
 [ext_resource type="Texture2D" uid="uid://3b4tuhy37vay" path="res://Assets/GUI Icons/Settings/Settings1.png" id="7_kj3ej"]
 [ext_resource type="AudioStream" uid="uid://bcuoeef5ydpyr" path="res://Assets/Audio/HeartBeat.mp3" id="7_ovqb1"]
 [ext_resource type="Texture2D" uid="uid://cplhtl8onpx4i" path="res://Assets/GUI Icons/Settings/Settings2.png" id="8_8f2mo"]
 [ext_resource type="PackedScene" uid="uid://d25t1ndsje02x" path="res://Door/WhiteDoor.tscn" id="8_f6ti6"]
+[ext_resource type="Script" path="res://Player/CharacterRotate.gd" id="8_glr4p"]
 [ext_resource type="Script" path="res://Menus/SettingsButton.gd" id="9_6s0wv"]
 [ext_resource type="PackedScene" uid="uid://dcsid4sp65dqs" path="res://Menus/settings_pannel.tscn" id="11_usofo"]
-[ext_resource type="Texture2D" uid="uid://ckw4ah054mkl" path="res://Assets/GameTileset/Props/RotatePlantIcons/spinnyPlant.png" id="13_pyw3j"]
-[ext_resource type="Script" path="res://TestLevel/PlantSpin.gd" id="14_we41j"]
-[ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="15_2sj7v"]
+[ext_resource type="PackedScene" uid="uid://cx6qbqg6qrrcb" path="res://SpinnyPlant/spinny_plant.tscn" id="14_7at8q"]
+[ext_resource type="PackedScene" uid="uid://c66ekchceccak" path="res://CheckPoint/checkpoint.tscn" id="15_wn5vn"]
+[ext_resource type="AudioStream" uid="uid://d2aiamof6vogf" path="res://Assets/Audio/scott-buckley-moonlight(chosic.com).mp3" id="17_slfiy"]
+[ext_resource type="Script" path="res://Music/GameMusic.gd" id="18_llp71"]
+[ext_resource type="PackedScene" uid="uid://dj8itxqbqvxxt" path="res://LightTeleport/LightTX.tscn" id="19_s4etw"]
+[ext_resource type="PackedScene" uid="uid://b42ik1gtvc5m8" path="res://LightTeleport/LightRX.tscn" id="20_b20cp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_543gr"]
 
@@ -927,18 +931,146 @@ physics_layer_0/physics_material = SubResource("PhysicsMaterial_543gr")
 sources/0 = SubResource("TileSetAtlasSource_pc2v4")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dqr1"]
-radius = 36.71
+radius = 12.04
 
-[sub_resource type="GDScript" id="GDScript_1lb7j"]
-script/source = "extends CollisionShape2D
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr544"]
+atlas = ExtResource("6_03wak")
+region = Rect2(0, 0, 16, 16)
 
-func _process(_delta):
-	look_at(get_global_mouse_position())
-	pass
-"
+[sub_resource type="AtlasTexture" id="AtlasTexture_06x7y"]
+atlas = ExtResource("6_03wak")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8nf8"]
+atlas = ExtResource("6_03wak")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vhvr"]
+atlas = ExtResource("6_03wak")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c06ph"]
+atlas = ExtResource("6_03wak")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te0fj"]
+atlas = ExtResource("6_03wak")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqefk"]
+atlas = ExtResource("6_03wak")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwtoq"]
+atlas = ExtResource("6_03wak")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdqvp"]
+atlas = ExtResource("6_03wak")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxmff"]
+atlas = ExtResource("6_03wak")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erjom"]
+atlas = ExtResource("6_03wak")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uobe"]
+atlas = ExtResource("6_03wak")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7spo5"]
+atlas = ExtResource("6_03wak")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p01y"]
+atlas = ExtResource("6_03wak")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntq1q"]
+atlas = ExtResource("6_03wak")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsn4n"]
+atlas = ExtResource("6_03wak")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b1uc7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mr544")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06x7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8nf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vhvr")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c06ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te0fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqefk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwtoq")
+}],
+"loop": true,
+"name": &"move_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdqvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxmff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erjom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uobe")
+}],
+"loop": true,
+"name": &"move_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7spo5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p01y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntq1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsn4n")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 5.0
+}]
 
 [sub_resource type="Gradient" id="Gradient_jcvug"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.428571, 0.494505, 1)
+colors = PackedColorArray(0.359069, 0.359069, 0.359069, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rpprk"]
 gradient = SubResource("Gradient_jcvug")
@@ -946,8 +1078,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0.985)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pc0c"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7nbo"]
+radius = 22.33
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ygmw"]
+size = Vector2(26, 24.7777)
 
 [sub_resource type="Environment" id="Environment_j817b"]
 glow_enabled = true
@@ -955,79 +1090,6 @@ glow_intensity = 1.03
 glow_strength = 2.0
 glow_bloom = 0.19
 glow_blend_mode = 0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_box32"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(128, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vf58j"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jue5"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_528de"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_npdxe"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rkpni"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s05xn"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qdjc6"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ej2x"]
-atlas = ExtResource("13_pyw3j")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ess5n"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_box32")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vf58j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1jue5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_528de")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_npdxe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rkpni")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s05xn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qdjc6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0ej2x")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uom5u"]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_78gb4")
@@ -1048,45 +1110,44 @@ layer_1/tile_data = PackedInt32Array(-196608, 65536, 0, -131072, 65536, 1, -6553
 
 [node name="Mirror1" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_jmmg0")]
 z_index = 2
-position = Vector2(101, 36)
-player = NodePath("../Player/CollisionShape2D")
+position = Vector2(91, 57)
+player = NodePath("../Player/Spin")
 
 [node name="Mirror2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_jmmg0")]
 z_index = 2
 position = Vector2(299, 70)
 rotation = -3.14159
-player = NodePath("../Player/CollisionShape2D")
+player = NodePath("../Player/Spin")
 
 [node name="Light" parent="." instance=ExtResource("4_6f8r3")]
 position = Vector2(71, 77)
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "audio")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "audio", "sprite")]
 unique_name_in_owner = true
 position = Vector2(77, 61)
-scale = Vector2(0.36, 0.36)
 script = ExtResource("5_avy7q")
 speed = 40
 camera = NodePath("Camera2D")
 audio = NodePath("AudioStreamPlayer2D")
+sprite = NodePath("CollisionShape2D/playerSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_0dqr1")
 debug_color = Color(0.67451, 0.380392, 0.85098, 0.419608)
-script = SubResource("GDScript_1lb7j")
 
-[node name="playerSprite" type="Sprite2D" parent="Player/CollisionShape2D"]
-position = Vector2(-3.80643e-06, -6.02007e-06)
-scale = Vector2(0.484375, 0.484375)
-texture = ExtResource("6_xorkv")
+[node name="playerSprite" type="AnimatedSprite2D" parent="Player/CollisionShape2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_b1uc7")
+animation = &"move_down"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-2.77779, 2.77777)
 scale = Vector2(0.498917, 0.498917)
-zoom = Vector2(3.885, 3.885)
+zoom = Vector2(5.734, 5.734)
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
-position = Vector2(0, -7.62939e-06)
+position = Vector2(0, 2.96699e-06)
 texture = SubResource("GradientTexture2D_rpprk")
 
 [node name="PlayerMirrorDetect" type="Area2D" parent="Player"]
@@ -1094,10 +1155,23 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="PlayerMirrorCollision" type="CollisionShape2D" parent="Player/PlayerMirrorDetect"]
-shape = SubResource("RectangleShape2D_2pc0c")
+position = Vector2(0, 1.38885)
+shape = SubResource("CircleShape2D_v7nbo")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("7_ovqb1")
+bus = &"VFX"
+
+[node name="PlayerCheckpointCollision" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CheckpointCollision" type="CollisionShape2D" parent="Player/PlayerCheckpointCollision"]
+position = Vector2(0, 1.38885)
+shape = SubResource("RectangleShape2D_0ygmw")
+
+[node name="Spin" type="Node2D" parent="Player"]
+script = ExtResource("8_glr4p")
 
 [node name="WinPlant" parent="." groups=["winPlants"] instance=ExtResource("7_7rc7f")]
 position = Vector2(299, 230)
@@ -1154,34 +1228,34 @@ texture_hover = ExtResource("8_8f2mo")
 [node name="Settings Pannel" parent="CanvasLayer" instance=ExtResource("11_usofo")]
 visible = false
 
-[node name="SpinnyPlant" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
-z_index = 2
-position = Vector2(131, 85)
-sprite_frames = SubResource("SpriteFrames_ess5n")
-script = ExtResource("14_we41j")
+[node name="SpinnyPlant" parent="." node_paths=PackedStringArray("player") groups=["Spinny"] instance=ExtResource("14_7at8q")]
+position = Vector2(96, 76)
 player = NodePath("../Player")
-distance = 60
 
-[node name="LightBeam" parent="SpinnyPlant" instance=ExtResource("15_2sj7v")]
+[node name="Checkpoint" parent="." instance=ExtResource("15_wn5vn")]
 
-[node name="SpinnyClickDetect" type="Button" parent="SpinnyPlant"]
-visibility_layer = 0
-offset_left = -7.0
-offset_top = -9.0
-offset_right = 6.0
-offset_bottom = 4.0
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_slfiy")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("18_llp71")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinnyPlant"]
-shape = SubResource("RectangleShape2D_uom5u")
+[node name="LightTx" parent="." node_paths=PackedStringArray("rx") instance=ExtResource("19_s4etw")]
+position = Vector2(162, 69)
+rx = NodePath("../LightRx")
+lightRadius = 90
 
+[node name="LightRx" parent="." instance=ExtResource("20_b20cp")]
+position = Vector2(111, 106)
+
+[connection signal="playerLight" from="Player" to="GameMusic" method="_on_player_player_light"]
 [connection signal="area_entered" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_entered"]
 [connection signal="area_exited" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_exited"]
+[connection signal="area_entered" from="Player/PlayerCheckpointCollision" to="Player" method="_on_player_checkpoint_collision_area_entered"]
 [connection signal="plantOff" from="WinPlant" to="." method="_on_win_plant_plant_off"]
 [connection signal="plantOn" from="WinPlant" to="." method="_on_win_plant_plant_on"]
 [connection signal="plantOff" from="WinPlant2" to="." method="_on_win_plant_plant_off"]
 [connection signal="plantOn" from="WinPlant2" to="." method="_on_win_plant_plant_on"]
 [connection signal="pressed" from="CanvasLayer/Settings Button/TextureButton" to="CanvasLayer/Settings Button" method="_on_texture_button_pressed"]
 [connection signal="interacting" from="SpinnyPlant" to="Player" method="_on_spinny_plant_interacting"]
-[connection signal="entered_light" from="SpinnyPlant/LightBeam" to="SpinnyPlant" method="_on_light_beam_entered_light"]
-[connection signal="left_light" from="SpinnyPlant/LightBeam" to="SpinnyPlant" method="_on_light_beam_left_light"]
-[connection signal="pressed" from="SpinnyPlant/SpinnyClickDetect" to="SpinnyPlant" method="_on_spinny_click_detect_pressed"]

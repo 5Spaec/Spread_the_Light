@@ -1,0 +1,96 @@
+[gd_scene load_steps=14 format=3 uid="uid://cx6qbqg6qrrcb"]
+
+[ext_resource type="Texture2D" uid="uid://cnca8x82jyo2k" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="1_cnhh4"]
+[ext_resource type="Script" path="res://TestLevel/PlantSpin.gd" id="2_cbds7"]
+[ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="3_ug476"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87iga"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31nrs"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74o4b"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(192, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8u4x"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdb4g"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuvpi"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn8v5"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(208, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muy37"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiuml"]
+atlas = ExtResource("1_cnhh4")
+region = Rect2(224, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ess5n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87iga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31nrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74o4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8u4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdb4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuvpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fn8v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muy37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iiuml")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SpinnyPlant" type="AnimatedSprite2D"]
+z_index = 2
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ess5n")
+script = ExtResource("2_cbds7")
+distance = 60
+
+[node name="LightBeam" parent="." instance=ExtResource("3_ug476")]
+
+[node name="SpinnyClickDetect" type="Button" parent="."]
+visibility_layer = 0
+offset_left = -7.0
+offset_top = -9.0
+offset_right = 6.0
+offset_bottom = 4.0
+
+[connection signal="entered_light" from="LightBeam" to="." method="_on_light_beam_entered_light"]
+[connection signal="left_light" from="LightBeam" to="." method="_on_light_beam_left_light"]
+[connection signal="pressed" from="SpinnyClickDetect" to="." method="_on_spinny_click_detect_pressed"]
