@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://d1bud5qdomvxw"]
+[gd_scene load_steps=47 format=3 uid="uid://d1bud5qdomvxw"]
 
 [ext_resource type="Script" path="res://TestLevel/LevelHandler.gd" id="1_78gb4"]
 [ext_resource type="Texture2D" uid="uid://nccy4rnj6yl7" path="res://Assets/GameTileset/Environment/Tiles.png" id="2_riplq"]
@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://c66ekchceccak" path="res://CheckPoint/checkpoint.tscn" id="15_wn5vn"]
 [ext_resource type="AudioStream" uid="uid://d2aiamof6vogf" path="res://Assets/Audio/scott-buckley-moonlight(chosic.com).mp3" id="17_slfiy"]
 [ext_resource type="Script" path="res://Music/GameMusic.gd" id="18_llp71"]
+[ext_resource type="PackedScene" uid="uid://dj8itxqbqvxxt" path="res://LightTeleport/LightTX.tscn" id="19_s4etw"]
+[ext_resource type="PackedScene" uid="uid://b42ik1gtvc5m8" path="res://LightTeleport/LightRX.tscn" id="20_b20cp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_543gr"]
 
@@ -1076,8 +1078,8 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0.985)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pc0c"]
-size = Vector2(26, 24.7777)
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7nbo"]
+radius = 22.33
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ygmw"]
 size = Vector2(26, 24.7777)
@@ -1155,7 +1157,7 @@ collision_mask = 2
 [node name="PlayerMirrorCollision" type="CollisionShape2D" parent="Player/PlayerMirrorDetect"]
 position = Vector2(0, 1.38885)
 scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_2pc0c")
+shape = SubResource("CircleShape2D_v7nbo")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("7_ovqb1")
@@ -1174,11 +1176,9 @@ shape = SubResource("RectangleShape2D_0ygmw")
 script = ExtResource("8_glr4p")
 
 [node name="WinPlant" parent="." groups=["winPlants"] instance=ExtResource("7_7rc7f")]
-visible = false
 position = Vector2(299, 230)
 
 [node name="WinPlant2" parent="." groups=["winPlants"] instance=ExtResource("7_7rc7f")]
-visible = false
 position = Vector2(199, 68)
 
 [node name="WhiteDoor" parent="." instance=ExtResource("8_f6ti6")]
@@ -1199,7 +1199,6 @@ text = "You Win!!!"
 environment = SubResource("Environment_j817b")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 color = Color(0, 0, 0, 1)
 blend_mode = 2
 
@@ -1243,6 +1242,13 @@ volume_db = -10.0
 autoplay = true
 bus = &"Music"
 script = ExtResource("18_llp71")
+
+[node name="LightTx" parent="." node_paths=PackedStringArray("rx") instance=ExtResource("19_s4etw")]
+position = Vector2(162, 69)
+rx = NodePath("../LightRx")
+
+[node name="LightRx" parent="." instance=ExtResource("20_b20cp")]
+position = Vector2(111, 106)
 
 [connection signal="playerLight" from="Player" to="GameMusic" method="_on_player_player_light"]
 [connection signal="area_entered" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_entered"]

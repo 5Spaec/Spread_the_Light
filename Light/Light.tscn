@@ -132,5 +132,6 @@ autoplay = "default"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(4.08873, 3.68364)
+energy = 0.6
 texture = SubResource("GradientTexture2D_mbhkk")
 texture_scale = 1.69
