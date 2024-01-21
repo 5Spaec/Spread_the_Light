@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var rx: Node2D
+@export var lightRadius: int = 64
 #@onready var area: Area2D = $Area2D
 @onready var pointLight: PointLight2D = $PointLight2D
 @onready var shape: CollisionShape2D = $Area2D/CollisionShape2D
@@ -9,6 +10,9 @@ extends Node2D
 func _ready():
 	rx.isLight.connect(lit.bind())
 	call_deferred("off")
+	pointLight.texture.width = lightRadius
+	pointLight.texture.height = lightRadius
+	shape.shape.radius = lightRadius/2
 	pass
 
 
