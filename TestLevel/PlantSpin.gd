@@ -4,10 +4,11 @@ var inLight = false
 var active = false
 @export var player: Node2D
 @export var distance: int = 30
-
+var animFrame: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.set_frame(0)
+	self.set_frame(animFrame)
+	animFrame = 3
 	pass # Replace with function body.
 
 
@@ -24,20 +25,31 @@ func _process(delta):
 
 		if((mousePos >= corner1 - cornerBounds) and (mousePos < corner1 + cornerBounds)):
 			self.set_frame(2)
+			animFrame = 2
 		elif((mousePos >= corner1 + cornerBounds) and (mousePos < corner2 - cornerBounds)):
 			self.set_frame(3)
+			animFrame = 3
+			
 		elif((mousePos >= corner2 - cornerBounds) and (mousePos < corner2 + cornerBounds)):
 			self.set_frame(4)
+			animFrame = 4
+			
 		elif((mousePos >= corner2 + cornerBounds) and (mousePos < corner3 - cornerBounds)):
 			self.set_frame(5)
+			animFrame = 5
+			
 		elif((mousePos >= corner3 - cornerBounds) and (mousePos < corner3 + cornerBounds)):
 			self.set_frame(6)
+			animFrame = 6
 		elif((mousePos >= corner3 + cornerBounds) and (mousePos < corner4 - cornerBounds)):
 			self.set_frame(7)
+			animFrame = 7
 		elif((mousePos >= corner4 - cornerBounds) and (mousePos < corner4 + cornerBounds)):
 			self.set_frame(8)
+			animFrame = 8
 		elif((mousePos >= corner4 + cornerBounds) or (mousePos < corner1 - cornerBounds)):
 			self.set_frame(1)
+			animFrame = 1
 		$LightBeam.rotation = deg_to_rad(mousePos) - (PI/2)
 		print(mousePos)
 	pass
@@ -45,7 +57,7 @@ func _process(delta):
 
 func _on_light_beam_entered_light():
 	inLight = true
-	self.set_frame(3)
+	self.set_frame(animFrame)
 
 
 func _on_light_beam_left_light():
