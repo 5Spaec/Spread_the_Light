@@ -77,11 +77,15 @@ func _on_mirror_detect_2_area_exited(area):
 # simple functions to draw and stop drawing particeles and such to the screen
 func drawEffects(dist):
 	# lights
+	#var tween = create_tween()
+	
 	pointLight.scale = Vector2((dist/1000), 0.23)
+	#tween.tween_property(pointLight, "scale", Vector2((dist/1000), 0.23), 0.1).set_trans(Tween.TRANS_SINE)
 	pointLight.position = Vector2(0, -dist/2)
+	#tween.tween_property(pointLight, "position", Vector2(0, -dist/2), 0.1).set_trans(Tween.TRANS_SINE)
 	
 	# particles
-	particle.scale = Vector2(dist/1000, 0.5)
+	#particle.scale = Vector2(dist/1000, 0.5)
 	particle.set_emitting(true)
 	#particle.position = Vector2(dist, 0)
 	

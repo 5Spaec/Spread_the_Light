@@ -1,22 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://k8jrhatg4mmy"]
+[gd_scene load_steps=9 format=3 uid="uid://k8jrhatg4mmy"]
 
 [ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="2_5uiy1"]
 [ext_resource type="Script" path="res://Mirror/Button.gd" id="2_ucv73"]
-[ext_resource type="Texture2D" uid="uid://bcneqlrefxxti" path="res://Assets/GameTileset/Props/Mirror/mirrorUnlit.png" id="3_ubq8v"]
-[ext_resource type="Texture2D" uid="uid://ck2yet44vxxg3" path="res://Assets/GameTileset/Props/Mirror/mirrorLit.png" id="4_jegps"]
+[ext_resource type="Texture2D" uid="uid://cnca8x82jyo2k" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="3_lr7k6"]
 [ext_resource type="Script" path="res://Mirror/changeMirrorSprite.gd" id="5_0630g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbg0h"]
-size = Vector2(16, 16)
+size = Vector2(16, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5s4a"]
+atlas = ExtResource("3_lr7k6")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo8kg"]
+atlas = ExtResource("3_lr7k6")
+region = Rect2(80, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cumhl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ubq8v")
+"texture": SubResource("AtlasTexture_l5s4a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_jegps")
+"texture": SubResource("AtlasTexture_wo8kg")
 }],
 "loop": true,
 "name": &"lightOn",
@@ -36,22 +43,25 @@ script = ExtResource("2_ucv73")
 [node name="LightBeam" parent="." instance=ExtResource("2_5uiy1")]
 
 [node name="MirrorRigidCollide2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_mbg0h")
 debug_color = Color(0.729412, 0.466667, 0.211765, 0.419608)
 
 [node name="MirrorSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
-scale = Vector2(0.125, 0.25)
+texture_filter = 1
+position = Vector2(0, 3)
+rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_cumhl")
 animation = &"lightOn"
 script = ExtResource("5_0630g")
 
 [node name="MirrorClickDetect" type="Button" parent="MirrorSprite"]
 visibility_layer = 0
-offset_left = -60.0
-offset_top = -30.0
-offset_right = 59.0
-offset_bottom = 25.0
+offset_left = -3.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 
 [connection signal="entered_light" from="LightBeam" to="MirrorSprite" method="_on_light_beam_entered_light"]
 [connection signal="left_light" from="LightBeam" to="MirrorSprite" method="_on_light_beam_left_light"]
