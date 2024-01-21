@@ -15,6 +15,6 @@ func _on_player_player_light(inLight: bool):
 	if inLight:
 		tween.tween_property(self, "volume_db", -10, 2).set_trans(Tween.TRANS_SINE)
 	elif not inLight:
-		tween.tween_property(self, "volume_db", -80, 2)
+		volume_db = -80
 		
 	pass

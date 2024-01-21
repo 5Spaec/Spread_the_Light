@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dj8itxqbqvxxt"]
+
+[ext_resource type="Script" path="res://LightTeleport/LightTX.gd" id="1_onn2s"]
+[ext_resource type="Texture2D" uid="uid://cnca8x82jyo2k" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_yk0ge"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqi6h"]
+atlas = ExtResource("2_yk0ge")
+region = Rect2(160, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3buj"]
+atlas = ExtResource("2_yk0ge")
+region = Rect2(144, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ubau"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqi6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3buj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i0h2u"]
+radius = 38.0132
+
+[sub_resource type="Gradient" id="Gradient_b5o8g"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6r1ne"]
+gradient = SubResource("Gradient_b5o8g")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="LightTx" type="Node2D"]
+script = ExtResource("1_onn2s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_2ubau")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_i0h2u")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_6r1ne")

@@ -61,7 +61,7 @@ func _physics_process(delta):
 signal turnon
 var enteredAreas = [];
 func _on_mirror_detect_2_area_entered(area):
-	print("EnteredLight")
+	#print("EnteredLight")
 	enteredAreas.append(area)
 	turnon.emit()
 	inLight = true

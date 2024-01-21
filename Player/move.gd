@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var timer: Timer = Timer.new()
 func _ready():
 	add_child(timer)
+	timer.timeout.connect(die.bind())
 	pass
 
 func _process(delta):
@@ -48,7 +49,7 @@ func _on_spinny_plant_interacting(isInteracting: bool):
 	var tween = create_tween()
 	if(isInteracting):
 		speed = 0
-		tween.tween_property(camera, "zoom", Vector2(2.5, 2.5), 0.3).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(camera, "zoom", Vector2(3.5, 3.5), 0.3).set_trans(Tween.TRANS_SINE)
 	else:
 		speed = speedCopy
 		tween.tween_property(camera, "zoom", zoomCopy, 0.3).set_trans(Tween.TRANS_SINE)
@@ -59,7 +60,7 @@ func _on_spinny_plant_interacting(isInteracting: bool):
 signal playerLight
 var enteredAreas = [];
 func _on_player_mirror_detect_area_entered(area):
-	print("EnteredLight")
+	#print("EnteredLight")
 	enteredAreas.append(area)
 	playerLight.emit(true)
 	inLight = true
@@ -78,7 +79,7 @@ func _on_player_mirror_detect_area_exited(area):
 		var tween = create_tween()
 		AudioServer.set_bus_volume_db(2, -72)
 		timer.start(9.75)
-		timer.timeout.connect(die.bind())
+		
 		
 		
 	
