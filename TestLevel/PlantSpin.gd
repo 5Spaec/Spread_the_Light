@@ -67,7 +67,7 @@ func _on_light_beam_left_light():
 signal interacting
 func _input(event):
 	if event is InputEventMouseButton:
-		if(active == true):
+		if(active == true ):
 			active = not active
 			interacting.emit(false)
 			
@@ -77,6 +77,7 @@ func _on_spinny_click_detect_pressed():
 	var playerPos: Vector2 = player.global_position
 	var box: Vector2 = self.global_position
 	if(sqrt(abs((box[0] - playerPos[0]) * (box[0] - playerPos[0]) + (box[1] - playerPos[1]) * (box[1] - playerPos[1]))) < distance):
-		active = not active
-		interacting.emit(true)
+		if(inLight == true):
+			active = not active
+			interacting.emit(true)
 	pass

@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://bu7s6cowsjiah"]
+
+[ext_resource type="Script" path="res://Flower/Flower.gd" id="1_yx0kt"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_21gc6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8e1ch"]
+radius = 28.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u180"]
+atlas = ExtResource("2_21gc6")
+region = Rect2(192, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjcwt"]
+atlas = ExtResource("2_21gc6")
+region = Rect2(176, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pg6uq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u180")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjcwt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gy85a"]
+radius = 6.08276
+
+[sub_resource type="Gradient" id="Gradient_b5o8g"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fo1x"]
+gradient = SubResource("Gradient_b5o8g")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Flower" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_yx0kt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8e1ch")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_pg6uq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gy85a")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_5fo1x")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
