@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cx6qbqg6qrrcb"]
 
-[ext_resource type="Texture2D" uid="uid://cnca8x82jyo2k" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="1_cnhh4"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="1_cnhh4"]
 [ext_resource type="Script" path="res://TestLevel/PlantSpin.gd" id="2_cbds7"]
 [ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="3_ug476"]
 
