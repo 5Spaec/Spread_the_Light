@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var camera: Camera2D;
 @export var audio: AudioStreamPlayer2D
 @export var sprite: AnimatedSprite2D
+@export var particles: GPUParticles2D
 @onready var speedCopy = speed
 @onready var zoomCopy = camera.zoom
 @onready var inLight = true
@@ -23,24 +24,34 @@ func _process(delta):
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
+	var move = false
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
-		sprite.play("move_right")
+		if not move:
+			move = true
+			sprite.play("move_right")
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-		sprite.play("move_left")
+		if not move:
+			move = true
+			sprite.play("move_left")
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
-		sprite.play("move_down")
+		if not move:
+			move = true
+			sprite.play("move_down")
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-		sprite.play("move_up")
+		if not move:
+			move = true
+			sprite.play("move_up")
 	
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 	else:
 		sprite.stop()
+		move = false
 	position += velocity * delta
 	move_and_slide()
 
@@ -68,6 +79,8 @@ func _on_player_mirror_detect_area_entered(area):
 	AudioServer.set_bus_volume_db(2, 0)
 	camera.offset = Vector2(0, 0)
 	timer.stop()
+	particles.emitting = false
+	particles.visible = false
 
 
 func _on_player_mirror_detect_area_exited(area):
@@ -79,6 +92,8 @@ func _on_player_mirror_detect_area_exited(area):
 		var tween = create_tween()
 		AudioServer.set_bus_volume_db(2, -72)
 		timer.start(9.75)
+		particles.visible = true
+		particles.emitting = true
 		
 		
 		

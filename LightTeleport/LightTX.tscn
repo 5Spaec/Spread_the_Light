@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dj8itxqbqvxxt"]
 
 [ext_resource type="Script" path="res://LightTeleport/LightTX.gd" id="1_onn2s"]
-[ext_resource type="Texture2D" uid="uid://cnca8x82jyo2k" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_yk0ge"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_yk0ge"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oqi6h"]
 atlas = ExtResource("2_yk0ge")

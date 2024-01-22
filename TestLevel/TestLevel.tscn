@@ -1,11 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://d1bud5qdomvxw"]
+[gd_scene load_steps=54 format=3 uid="uid://d1bud5qdomvxw"]
 
 [ext_resource type="Script" path="res://TestLevel/LevelHandler.gd" id="1_78gb4"]
 [ext_resource type="Texture2D" uid="uid://nccy4rnj6yl7" path="res://Assets/GameTileset/Environment/Tiles.png" id="2_riplq"]
 [ext_resource type="PackedScene" uid="uid://k8jrhatg4mmy" path="res://Mirror/Mirror.tscn" id="3_jmmg0"]
 [ext_resource type="PackedScene" uid="uid://p1rg5xndouq8" path="res://Light/Light.tscn" id="4_6f8r3"]
 [ext_resource type="Script" path="res://Player/move.gd" id="5_avy7q"]
-[ext_resource type="Texture2D" uid="uid://k1f762nncfpm" path="res://Assets/GameTileset/Custom_TileSet/Character Sprite.png" id="6_03wak"]
+[ext_resource type="Texture2D" uid="uid://c4y6jmx17igwl" path="res://Assets/GameTileset/Custom_TileSet/Character Sprite.png" id="6_03wak"]
 [ext_resource type="PackedScene" uid="uid://c2famh6iuv8q8" path="res://Win Plant/WinPlant.tscn" id="7_7rc7f"]
 [ext_resource type="Texture2D" uid="uid://3b4tuhy37vay" path="res://Assets/GUI Icons/Settings/Settings1.png" id="7_kj3ej"]
 [ext_resource type="AudioStream" uid="uid://bcuoeef5ydpyr" path="res://Assets/Audio/HeartBeat.mp3" id="7_ovqb1"]
@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://d25t1ndsje02x" path="res://Door/WhiteDoor.tscn" id="8_f6ti6"]
 [ext_resource type="Script" path="res://Player/CharacterRotate.gd" id="8_glr4p"]
 [ext_resource type="Script" path="res://Menus/SettingsButton.gd" id="9_6s0wv"]
+[ext_resource type="Shader" path="res://TestLevel/darkness.gdshader" id="9_cnbir"]
+[ext_resource type="Texture2D" uid="uid://dduwtmxtyrplc" path="res://Assets/GameTileset/Props/Darkness/0001.png" id="9_dop3t"]
+[ext_resource type="Texture2D" uid="uid://es38lml0ynj" path="res://Assets/GameTileset/Props/Darkness/0002.png" id="10_3gf1k"]
+[ext_resource type="Texture2D" uid="uid://bu81q5wthtmkd" path="res://Assets/GameTileset/Props/Darkness/0003.png" id="11_spe1v"]
 [ext_resource type="PackedScene" uid="uid://dcsid4sp65dqs" path="res://Menus/settings_pannel.tscn" id="11_usofo"]
 [ext_resource type="PackedScene" uid="uid://cx6qbqg6qrrcb" path="res://SpinnyPlant/spinny_plant.tscn" id="14_7at8q"]
 [ext_resource type="PackedScene" uid="uid://c66ekchceccak" path="res://CheckPoint/checkpoint.tscn" id="15_wn5vn"]
@@ -1068,12 +1072,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_jcvug"]
+[sub_resource type="Gradient" id="Gradient_v35k1"]
 offsets = PackedFloat32Array(0.428571, 0.494505, 1)
 colors = PackedColorArray(0.359069, 0.359069, 0.359069, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rpprk"]
-gradient = SubResource("Gradient_jcvug")
+gradient = SubResource("Gradient_v35k1")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0.985)
@@ -1084,12 +1088,35 @@ radius = 22.33
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ygmw"]
 size = Vector2(26, 24.7777)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvdd5"]
+shader = ExtResource("9_cnbir")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_grg2j"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 200, 1)
+angle_min = -56.2
+angle_max = 60.6
+initial_velocity_max = 6.75
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_ygasn"]
+frames = 3
+speed_scale = 1.8
+frame_0/texture = ExtResource("9_dop3t")
+frame_0/duration = 0.27
+frame_1/texture = ExtResource("10_3gf1k")
+frame_1/duration = 0.48
+frame_2/texture = ExtResource("11_spe1v")
+frame_2/duration = 0.27
+
 [sub_resource type="Environment" id="Environment_j817b"]
 glow_enabled = true
-glow_intensity = 1.03
 glow_strength = 2.0
 glow_bloom = 0.19
-glow_blend_mode = 0
+glow_blend_mode = 4
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_78gb4")
@@ -1122,7 +1149,7 @@ player = NodePath("../Player/Spin")
 [node name="Light" parent="." instance=ExtResource("4_6f8r3")]
 position = Vector2(71, 77)
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "audio", "sprite")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "audio", "sprite", "particles")]
 unique_name_in_owner = true
 position = Vector2(77, 61)
 script = ExtResource("5_avy7q")
@@ -1130,6 +1157,7 @@ speed = 40
 camera = NodePath("Camera2D")
 audio = NodePath("AudioStreamPlayer2D")
 sprite = NodePath("CollisionShape2D/playerSprite")
+particles = NodePath("CanvasLayer/Spook Particles")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 1)
@@ -1173,6 +1201,19 @@ shape = SubResource("RectangleShape2D_0ygmw")
 [node name="Spin" type="Node2D" parent="Player"]
 script = ExtResource("8_glr4p")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+follow_viewport_enabled = true
+
+[node name="Spook Particles" type="GPUParticles2D" parent="Player/CanvasLayer"]
+light_mask = 0
+material = SubResource("ShaderMaterial_xvdd5")
+position = Vector2(77, 61)
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_grg2j")
+texture = SubResource("AnimatedTexture_ygasn")
+lifetime = 2.0
+randomness = 0.09
+
 [node name="WinPlant" parent="." groups=["winPlants"] instance=ExtResource("7_7rc7f")]
 position = Vector2(299, 230)
 
@@ -1197,6 +1238,7 @@ text = "You Win!!!"
 environment = SubResource("Environment_j817b")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 color = Color(0, 0, 0, 1)
 blend_mode = 2
 
