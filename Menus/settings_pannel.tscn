@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcsid4sp65dqs"]
+[gd_scene load_steps=11 format=3 uid="uid://dcsid4sp65dqs"]
 
 [ext_resource type="Script" path="res://Menus/SettingsPannel.gd" id="1_xi3po"]
+[ext_resource type="Texture2D" uid="uid://dduwtmxtyrplc" path="res://Assets/GameTileset/Props/Darkness/0001.png" id="2_ttb54"]
 [ext_resource type="Texture2D" uid="uid://dyubqwc44n4s5" path="res://Assets/GUI Icons/MainMenu/Menu1.png" id="2_yhusb"]
+[ext_resource type="Texture2D" uid="uid://es38lml0ynj" path="res://Assets/GameTileset/Props/Darkness/0002.png" id="3_tr7ya"]
 [ext_resource type="Texture2D" uid="uid://coqtf027qfc7k" path="res://Assets/GUI Icons/MainMenu/Menu2.png" id="3_xuf8a"]
 [ext_resource type="Texture2D" uid="uid://d37y40gooy4g3" path="res://Assets/GUI Icons/LevelSelect/LevelSelect1.png" id="4_oqqum"]
 [ext_resource type="Texture2D" uid="uid://ccetn8w45wkiy" path="res://Assets/GUI Icons/LevelSelect/LevelSelect2.png" id="5_shxim"]
 [ext_resource type="Texture2D" uid="uid://baw0ktyvusnn" path="res://Assets/GUI Icons/Exit/Exit1.png" id="6_rsb4l"]
 [ext_resource type="Texture2D" uid="uid://cv3v7ev343o5u" path="res://Assets/GUI Icons/Exit/Exit2.png" id="7_dckdq"]
+
+[sub_resource type="Theme" id="Theme_302r7"]
 
 [node name="Settings Pannel" type="Control"]
 layout_mode = 3
@@ -41,13 +45,16 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.00222222
-anchor_top = 0.164
+anchor_top = 0.146
 anchor_right = 0.384444
-anchor_bottom = 0.164
+anchor_bottom = 0.21
 offset_left = 27.0
 offset_top = 37.0
 offset_right = 198.0
 offset_bottom = 53.0
+theme = SubResource("Theme_302r7")
+theme_override_icons/grabber = ExtResource("2_ttb54")
+theme_override_icons/grabber_highlight = ExtResource("3_tr7ya")
 min_value = -45.0
 max_value = 15.0
 value = -5.0
@@ -58,17 +65,17 @@ metadata/_edit_use_anchors_ = true
 [node name="VolumeText" type="RichTextLabel" parent="Panel/HSlider"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = -33.0
-offset_right = 62.0
-offset_bottom = -6.0
+offset_top = -22.0
+offset_right = 109.0
+offset_bottom = 5.0
 text = "Volume (db)"
 
 [node name="VolumeAmount" type="RichTextLabel" parent="Panel/HSlider"]
 layout_mode = 0
-offset_left = 359.0
-offset_top = -6.0
-offset_right = 420.0
-offset_bottom = 21.0
+offset_left = 355.0
+offset_top = 12.0
+offset_right = 416.0
+offset_bottom = 39.0
 text = "-5"
 
 [node name="SettingsText" type="RichTextLabel" parent="Panel"]

@@ -24,24 +24,34 @@ func _process(delta):
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
+	var move = false
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
-		sprite.play("move_right")
+		if not move:
+			move = true
+			sprite.play("move_right")
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-		sprite.play("move_left")
+		if not move:
+			move = true
+			sprite.play("move_left")
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
-		sprite.play("move_down")
+		if not move:
+			move = true
+			sprite.play("move_down")
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-		sprite.play("move_up")
+		if not move:
+			move = true
+			sprite.play("move_up")
 	
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 	else:
 		sprite.stop()
+		move = false
 	position += velocity * delta
 	move_and_slide()
 

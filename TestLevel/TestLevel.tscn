@@ -1238,6 +1238,7 @@ text = "You Win!!!"
 environment = SubResource("Environment_j817b")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 color = Color(0, 0, 0, 1)
 blend_mode = 2
 

@@ -51,6 +51,7 @@ shape = SubResource("RectangleShape2D_a6j3a")
 position = Vector2(0, -8.645)
 color = Color(0.729412, 0.698039, 0.615686, 0.309804)
 script = ExtResource("5_ha2pq")
+rayLength = 300
 
 [node name="Area2D" type="Area2D" parent="Polygon2D"]
 collision_layer = 2
