@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var camera: Camera2D;
 @export var audio: AudioStreamPlayer2D
 @export var sprite: AnimatedSprite2D
+@export var particles: GPUParticles2D
 @onready var speedCopy = speed
 @onready var zoomCopy = camera.zoom
 @onready var inLight = true
@@ -68,6 +69,8 @@ func _on_player_mirror_detect_area_entered(area):
 	AudioServer.set_bus_volume_db(2, 0)
 	camera.offset = Vector2(0, 0)
 	timer.stop()
+	particles.emitting = false
+	particles.visible = false
 
 
 func _on_player_mirror_detect_area_exited(area):
@@ -79,6 +82,8 @@ func _on_player_mirror_detect_area_exited(area):
 		var tween = create_tween()
 		AudioServer.set_bus_volume_db(2, -72)
 		timer.start(9.75)
+		particles.visible = true
+		particles.emitting = true
 		
 		
 		

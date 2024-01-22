@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://birtquyc6le8e" path="res://Mirror/light_beam.tscn" id="2_5uiy1"]
 [ext_resource type="Script" path="res://Mirror/Button.gd" id="2_ucv73"]
-[ext_resource type="Texture2D" uid="uid://cnca8x82jyo2k" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="3_lr7k6"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="3_lr7k6"]
 [ext_resource type="Script" path="res://Mirror/changeMirrorSprite.gd" id="5_0630g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbg0h"]

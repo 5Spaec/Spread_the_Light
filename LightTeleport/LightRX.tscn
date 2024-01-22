@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b42ik1gtvc5m8"]
 
 [ext_resource type="Script" path="res://LightTeleport/LightRX.gd" id="1_o56yl"]
-[ext_resource type="Texture2D" uid="uid://cnca8x82jyo2k" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_crewj"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_crewj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mjk3i"]
 radius = 6.08276

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://birtquyc6le8e"]
+[gd_scene load_steps=10 format=3 uid="uid://birtquyc6le8e"]
 
 [ext_resource type="Script" path="res://Mirror/enteredLightSignal.gd" id="1_aw0ck"]
 [ext_resource type="Texture2D" uid="uid://d002taxui77qx" path="res://Assets/GameTileset/Props/LightGradient/LightGradient.png" id="3_dpn72"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6j3a"]
 size = Vector2(16, 16)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uaqhu"]
+blend_mode = 1
 
 [sub_resource type="Curve" id="Curve_l1kal"]
 _data = [Vector2(0, 0.791209), 0.0, 0.349555, 0, 0, Vector2(0.137725, 1), 0.0, 0.0, 0, 0, Vector2(0.676647, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -64,6 +67,7 @@ color = Color(0.823529, 0.843137, 0.647059, 1)
 texture = ExtResource("3_dpn72")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="PointLight2D"]
+material = SubResource("CanvasItemMaterial_uaqhu")
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_2xbwj")
