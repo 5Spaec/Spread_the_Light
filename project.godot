@@ -50,3 +50,7 @@ move_down={
 
 2d_physics/layer_2="Light"
 2d_physics/layer_4="Checkpoints"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

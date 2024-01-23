@@ -39,6 +39,7 @@ func _physics_process(delta):
 			# checks for if the ray is colliding and is in the light if not then the light should turn off
 			if rays[i].is_colliding():
 				points[i] = to_local(rays[i].get_collision_point())
+				#print(to_local(rays[i].get_collision_point()))
 			# for some reason in godot whenever a ray does not hit anything it returns 0 0 so this is here just incase a 0 0 is returned
 			else:
 				points[i] = (Vector2(-lightWidth + (spreadDist * i) + (lightWidth/2), -rayLength))

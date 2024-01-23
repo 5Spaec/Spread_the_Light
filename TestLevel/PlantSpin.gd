@@ -51,7 +51,6 @@ func _process(delta):
 			self.set_frame(1)
 			animFrame = 1
 		$LightBeam.rotation = deg_to_rad(mousePos) - (PI/2)
-		print(mousePos)
 	pass
 
 

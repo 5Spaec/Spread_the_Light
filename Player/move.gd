@@ -57,12 +57,13 @@ func _physics_process(delta):
 
 
 func _on_spinny_plant_interacting(isInteracting: bool):
-	var tween = create_tween()
 	if(isInteracting):
 		speed = 0
+		var tween = create_tween()
 		tween.tween_property(camera, "zoom", Vector2(3.5, 3.5), 0.3).set_trans(Tween.TRANS_SINE)
 	else:
 		speed = speedCopy
+		var tween = create_tween()
 		tween.tween_property(camera, "zoom", zoomCopy, 0.3).set_trans(Tween.TRANS_SINE)
 
 
@@ -89,7 +90,6 @@ func _on_player_mirror_detect_area_exited(area):
 		inLight = false
 		playerLight.emit(false)
 		audio.play()
-		var tween = create_tween()
 		AudioServer.set_bus_volume_db(2, -72)
 		timer.start(9.75)
 		particles.visible = true
