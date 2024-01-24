@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://cn7s1vkbfmhv8"]
+
+[ext_resource type="Script" path="res://Door/WhiteDoor.gd" id="1_ifxn5"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_860x3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5cv5"]
+atlas = ExtResource("2_860x3")
+region = Rect2(64, 80, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d235"]
+atlas = ExtResource("2_860x3")
+region = Rect2(64, 48, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88k6e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5cv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d235")
+}],
+"loop": true,
+"name": &"White",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7a42d"]
+size = Vector2(32, 31.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gwr1h"]
+size = Vector2(42.6667, 23.5)
+
+[node name="ShortMossDoor" type="Area2D"]
+scale = Vector2(1.5, 1.5)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ifxn5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_88k6e")
+animation = &"White"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="AnimatedSprite2D"]
+collision_mask = 0
+
+[node name="DoorShape" type="CollisionShape2D" parent="AnimatedSprite2D/StaticBody2D"]
+position = Vector2(0, -0.333334)
+shape = SubResource("RectangleShape2D_7a42d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_gwr1h")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
