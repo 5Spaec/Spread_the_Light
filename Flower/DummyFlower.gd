@@ -1,8 +1,8 @@
-
 extends Area2D
 
 @export var LightRadius = 64
 @export var delay = 0
+@export var alwaysOn = false
 var inLight = false
 var isDisabled = true
 @onready var TXCollision: CollisionShape2D = $CollisionShape2D
@@ -14,8 +14,11 @@ func _ready():
 	call_deferred("off")
 	light.texture.width = LightRadius
 	light.texture.height = LightRadius
-	
+		
 	call_deferred("start")
+	if alwaysOn:
+		call_deferred("on")
+		Sprite.set_frame(1)
 
 func _process(delta):
 	pass
@@ -34,7 +37,7 @@ func _on_area_2d_area_entered(area):
 
 func _on_area_2d_area_exited(area):
 	areas.pop_back()
-	if(areas.is_empty()):
+	if(areas.is_empty() and not alwaysOn):
 		call_deferred("off")
 		Sprite.set_frame(0)
 		light.enabled = false
@@ -44,8 +47,7 @@ func _on_area_2d_area_exited(area):
 
 func on():
 	inLight = true
-	TXCollision.set_disabled(false)
-	
+	TXCollision.disabled = false
 	
 	
 func off():

@@ -14,6 +14,7 @@ extends CharacterBody2D
 func _ready():
 	add_child(timer)
 	timer.timeout.connect(die.bind())
+	#$CanvasLayer2/DialogBox.queue_lines("howddddddddddddddddyyyyyyyyyy!!!!!!!!!!")
 	pass
 
 func _process(delta):
@@ -82,6 +83,7 @@ func _on_player_mirror_detect_area_entered(area):
 	timer.stop()
 	particles.emitting = false
 	particles.visible = false
+	particles.restart()
 
 
 func _on_player_mirror_detect_area_exited(area):
@@ -106,3 +108,15 @@ func die():
 func _on_player_checkpoint_collision_area_entered(area):
 	checkpointPos = area.global_position
 	
+
+
+func _on_cam_tx_switch_cam(pos: Vector2, sendPlayer: bool):
+	if(sendPlayer):
+		speed = 0
+		var tween = create_tween()
+		tween.tween_property(camera, "position", to_local(pos), 0.3).set_trans(Tween.TRANS_SINE)
+	else:
+		speed = speedCopy
+		var tween = create_tween()
+		tween.tween_property(camera, "position", Vector2(0,0), 0.3).set_trans(Tween.TRANS_SINE)
+	pass

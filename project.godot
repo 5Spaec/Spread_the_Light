@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="Spread the Light"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gobox/plugin.cfg")
+
 [input]
 
 move_right={
@@ -50,6 +54,10 @@ move_down={
 
 2d_physics/layer_2="Light"
 2d_physics/layer_4="Checkpoints"
+2d_physics/layer_5="Dummy"
+2d_physics/layer_6="Door"
+2d_physics/layer_7="TreeArea"
+2d_physics/layer_8="PlayerArea"
 
 [rendering]
 

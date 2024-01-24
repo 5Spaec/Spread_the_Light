@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 var inLight = false
 var active = false
-@export var player: Node2D
+@export var player: Camera2D
 @export var distance: int = 30
 var animFrame: int = 0
 # Called when the node enters the scene tree for the first time.

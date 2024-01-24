@@ -21,4 +21,4 @@ func _on_area_exited(_area):
 	if(lights.is_empty()):
 		sprite.set_frame(0)
 		door.set_collision_layer_value(1, true)
-	pass # Replace with function body.
+	pass
