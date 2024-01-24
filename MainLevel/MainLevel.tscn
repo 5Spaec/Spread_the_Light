@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cr8irfyseoksg"]
+[gd_scene load_steps=62 format=3 uid="uid://cr8irfyseoksg"]
 
 [ext_resource type="Script" path="res://Player/move.gd" id="1_mhxbo"]
 [ext_resource type="Texture2D" uid="uid://c4y6jmx17igwl" path="res://Assets/GameTileset/Custom_TileSet/Character Sprite.png" id="2_v3w1k"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cx6qbqg6qrrcb" path="res://SpinnyPlant/spinny_plant.tscn" id="19_inqsl"]
 [ext_resource type="PackedScene" uid="uid://imy4auqanqjh" path="res://Door/MossDoor.tscn" id="22_27bgs"]
 [ext_resource type="Texture2D" uid="uid://dt0lguae1uexh" path="res://Assets/GameTileset/Custom_TileSet/Pixel Tree.png" id="23_b8xot"]
+[ext_resource type="PackedScene" uid="uid://cspv7bkygow5u" path="res://Bulb/BulbThing.tscn" id="23_k6hcv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vsgcl"]
 
@@ -746,6 +747,9 @@ size = Vector2(172, 100)
 [sub_resource type="CircleShape2D" id="CircleShape2D_tk50s"]
 radius = 83.0542
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2iu6e"]
+radius = 87.1436
+
 [node name="MainLevel" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -858,7 +862,6 @@ layout_mode = 2
 environment = SubResource("Environment_ul76t")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 color = Color(0, 0, 0, 1)
 blend_mode = 2
 
@@ -1350,12 +1353,12 @@ position = Vector2(140, -380)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="Area2D" type="Area2D" parent="Maze"]
+[node name="DarknessArea2D" type="Area2D" parent="Maze"]
 position = Vector2(-63, -457)
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DarknessArea2D"]
 position = Vector2(-7, -10)
 shape = SubResource("CircleShape2D_0voys")
 
@@ -1402,6 +1405,19 @@ doorPoint = NodePath("../Maze/MossDoor")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
 shape = SubResource("CircleShape2D_tk50s")
+
+[node name="BulbThing" parent="." node_paths=PackedStringArray("player", "treeArea", "dialogBox", "playerArea", "playerCamera", "doorPoint", "darknessAreaShape") instance=ExtResource("23_k6hcv")]
+position = Vector2(-400, -500)
+player = NodePath("../Player/Spin")
+treeArea = NodePath("../LightTree/TreeArea")
+dialogBox = NodePath("../Player/CanvasLayer2/DialogBox")
+playerArea = NodePath("../Player/PlayerMirrorDetect")
+playerCamera = NodePath("../Player/Camera2D")
+doorPoint = NodePath("../MossDoor2")
+darknessAreaShape = NodePath("../Maze/DarknessArea2D/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulbThing"]
+shape = SubResource("CircleShape2D_2iu6e")
 
 [connection signal="area_entered" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_entered"]
 [connection signal="area_exited" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_exited"]

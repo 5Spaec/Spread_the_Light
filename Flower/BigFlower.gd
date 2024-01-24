@@ -61,6 +61,7 @@ func moveCamToDoor():
 	tween.tween_property(playerCamera, "position", to_local(doorPoint.global_position), 0.3).set_trans(Tween.TRANS_SINE)
 	var timer: Timer = Timer.new()
 	add_child(timer)
+	timer.one_shot = true
 	timer.start(3)
 	timer.timeout.connect(resetPlayerCam.bind())
 	

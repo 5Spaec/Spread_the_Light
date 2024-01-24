@@ -1,17 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://d073ujrvigkld"]
+[gd_scene load_steps=8 format=3 uid="uid://cspv7bkygow5u"]
 
-[ext_resource type="Script" path="res://BulbPlant/BulbPlant.gd" id="1_nsuhe"]
-[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_uadxq"]
+[ext_resource type="Script" path="res://Bulb/BulbThing.gd" id="1_x4o2s"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_kyfmn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wjrdk"]
-atlas = ExtResource("2_uadxq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_own0o"]
+atlas = ExtResource("2_kyfmn")
 region = Rect2(144, 192, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_uhqh4"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ooh6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wjrdk")
+"texture": SubResource("AtlasTexture_own0o")
 }],
 "loop": true,
 "name": &"default",
@@ -30,15 +30,15 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
-[node name="BulbPlant" type="Area2D"]
+[node name="BulbThing" type="Area2D"]
 collision_layer = 34
 collision_mask = 0
-script = ExtResource("1_nsuhe")
+script = ExtResource("1_x4o2s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -4)
-sprite_frames = SubResource("SpriteFrames_uhqh4")
+sprite_frames = SubResource("SpriteFrames_4ooh6")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
