@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" path="res://addons/GoBox/scenes/DialogRig.tscn" id="10_4j3um"]
 [ext_resource type="Texture2D" uid="uid://cplhtl8onpx4i" path="res://Assets/GUI Icons/Settings/Settings2.png" id="11_s60ov"]
 [ext_resource type="PackedScene" uid="uid://dcsid4sp65dqs" path="res://Menus/settings_pannel.tscn" id="12_3ygjm"]
-[ext_resource type="AudioStream" uid="uid://d2aiamof6vogf" path="res://Assets/Audio/scott-buckley-moonlight(chosic.com).mp3" id="13_llcpo"]
 [ext_resource type="Script" path="res://Music/GameMusic.gd" id="14_jidgr"]
+[ext_resource type="AudioStream" uid="uid://hhigi06hqn1u" path="res://Assets/Audio/little-slimex27s-adventure.mp3" id="16_1g4n4"]
 [ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="16_xdqhc"]
 [ext_resource type="PackedScene" uid="uid://bu7s6cowsjiah" path="res://Flower/Flower.tscn" id="18_1djhq"]
 [ext_resource type="PackedScene" uid="uid://d073ujrvigkld" path="res://Flower/BigFlower.tscn" id="18_163wd"]
@@ -929,7 +929,7 @@ texture_hover = ExtResource("11_s60ov")
 visible = false
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_llcpo")
+stream = ExtResource("16_1g4n4")
 volume_db = -10.0
 autoplay = true
 bus = &"Music"
