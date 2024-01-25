@@ -10,3 +10,7 @@ func _on_h_slider_value_changed(value):
 
 func _on_exit_game_button_pressed():
 	get_tree().quit()
+
+
+func _on_main_menu_button_pressed():
+	get_tree().change_scene_to_file("res://Menus/MainMenu.tscn")

@@ -1,24 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://dj8itxqbqvxxt"]
+[gd_scene load_steps=9 format=3 uid="uid://dcdcojphewy5k"]
 
-[ext_resource type="Script" path="res://LightTeleport/LightTX.gd" id="1_onn2s"]
-[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_yk0ge"]
+[ext_resource type="Script" path="res://TeleCam/CamTX.gd" id="1_jik1n"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_dd5uy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oqi6h"]
-atlas = ExtResource("2_yk0ge")
-region = Rect2(160, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wt3g"]
+atlas = ExtResource("2_dd5uy")
+region = Rect2(160, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j3buj"]
-atlas = ExtResource("2_yk0ge")
-region = Rect2(144, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut27j"]
+atlas = ExtResource("2_dd5uy")
+region = Rect2(144, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2ubau"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oqi6h")
+"texture": SubResource("AtlasTexture_3wt3g")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j3buj")
+"texture": SubResource("AtlasTexture_ut27j")
 }],
 "loop": true,
 "name": &"default",
@@ -37,8 +37,8 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
-[node name="LightTx" type="Node2D"]
-script = ExtResource("1_onn2s")
+[node name="CamTx" type="Node2D"]
+script = ExtResource("1_jik1n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -53,3 +53,12 @@ shape = SubResource("CircleShape2D_i0h2u")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = SubResource("GradientTexture2D_6r1ne")
+
+[node name="TxClickDetect" type="Button" parent="."]
+visibility_layer = 0
+offset_left = -6.0
+offset_top = -7.0
+offset_right = 6.0
+offset_bottom = 7.0
+
+[connection signal="pressed" from="TxClickDetect" to="." method="_on_tx_click_detect_pressed"]

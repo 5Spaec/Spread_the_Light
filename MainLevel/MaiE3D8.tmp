@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://cr8irfyseoksg"]
+[gd_scene load_steps=73 format=3 uid="uid://cr8irfyseoksg"]
 
 [ext_resource type="Script" path="res://Player/move.gd" id="1_mhxbo"]
 [ext_resource type="Script" path="res://MainLevel/EndingLight.gd" id="1_qcifo"]
@@ -736,13 +736,6 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
-[sub_resource type="Gradient" id="Gradient_6b1mr"]
-offsets = PackedFloat32Array(0, 0.352727, 0.694545, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_npy2n"]
-gradient = SubResource("Gradient_6b1mr")
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_tk50s"]
 radius = 83.0542
 
@@ -789,7 +782,6 @@ treeSprite = NodePath("../TreeRoom/LightTree")
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
 tile_set = SubResource("TileSet_tht4b")
-rendering_quadrant_size = 20
 collision_visibility_mode = 1
 format = 2
 layer_0/name = "Floor"
@@ -875,6 +867,7 @@ visibility_rect = Rect2(-5000, -5000, 10000, 10000)
 local_coords = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="Player"]
+visible = false
 
 [node name="DialogBox" type="CenterContainer" parent="Player/CanvasLayer2"]
 anchors_preset = 7
@@ -1012,11 +1005,6 @@ LightRadius = 120
 position = Vector2(88, 419)
 player = NodePath("../../Player/Camera2D")
 distance = 50
-
-[node name="ClickMe" parent="Tutorial/SpinnyPlant" node_paths=PackedStringArray("clickItem") instance=ExtResource("31_8ficn")]
-position = Vector2(0, -19)
-scale = Vector2(0.58, 0.58)
-clickItem = NodePath("..")
 
 [node name="SpinnyPlant2" parent="Tutorial" node_paths=PackedStringArray("player") groups=["Spinny"] instance=ExtResource("19_inqsl")]
 position = Vector2(19, 272)
@@ -1413,22 +1401,10 @@ position = Vector2(112, -224)
 scale = Vector2(1, 1)
 collision_mask = 34
 
-[node name="PointLight2D" type="PointLight2D" parent="Maze/MossDoor"]
-position = Vector2(0, -20)
-scale = Vector2(1, 0.59375)
-energy = 0.13
-texture = SubResource("GradientTexture2D_npy2n")
-
 [node name="MossDoor2" parent="." instance=ExtResource("22_27bgs")]
 position = Vector2(464, -224)
 scale = Vector2(1, 1)
 collision_mask = 2
-
-[node name="PointLight2D2" type="PointLight2D" parent="MossDoor2"]
-position = Vector2(-1, -18)
-scale = Vector2(1, 0.59375)
-energy = 0.13
-texture = SubResource("GradientTexture2D_npy2n")
 
 [node name="Flower" parent="." node_paths=PackedStringArray("player", "treeArea", "dialogBox", "playerArea", "playerCamera", "doorPoint") instance=ExtResource("18_163wd")]
 position = Vector2(541, 57)
@@ -1441,11 +1417,6 @@ doorPoint = NodePath("../Maze/MossDoor")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flower"]
 shape = SubResource("CircleShape2D_tk50s")
-
-[node name="ClickMe2" parent="Flower" node_paths=PackedStringArray("clickItem") instance=ExtResource("31_8ficn")]
-position = Vector2(-7.27596e-12, -31)
-scale = Vector2(0.58, 0.58)
-clickItem = NodePath("..")
 
 [node name="BulbThing" parent="." node_paths=PackedStringArray("player", "treeArea", "dialogBox", "playerArea", "playerCamera", "doorPoint", "darknessAreaShape") instance=ExtResource("23_k6hcv")]
 position = Vector2(-400, -500)
@@ -1487,20 +1458,9 @@ position = Vector2(629, -183)
 position = Vector2(789, -349)
 camera = NodePath("../../Player/Camera2D")
 
-[node name="ClickMe4" parent="MushromPuzzle/CamRx" node_paths=PackedStringArray("clickItem") instance=ExtResource("31_8ficn")]
-z_index = 1
-position = Vector2(0, -17)
-scale = Vector2(0.58, 0.58)
-clickItem = NodePath("..")
-
 [node name="CamTx" parent="MushromPuzzle" node_paths=PackedStringArray("rx") instance=ExtResource("27_g00m3")]
 position = Vector2(778, -184)
 rx = NodePath("../CamRx")
-
-[node name="ClickMe3" parent="MushromPuzzle/CamTx" node_paths=PackedStringArray("clickItem") instance=ExtResource("31_8ficn")]
-position = Vector2(0, -16)
-scale = Vector2(0.58, 0.58)
-clickItem = NodePath("..")
 
 [node name="Flower2" parent="MushromPuzzle" instance=ExtResource("18_1djhq")]
 position = Vector2(624, -138)
@@ -1682,7 +1642,7 @@ player = NodePath("../../Player/Camera2D")
 distance = 50
 
 [node name="BigShroom" parent="." node_paths=PackedStringArray("player", "treeArea", "dialogBox", "playerArea", "playerCamera") instance=ExtResource("29_7ccu2")]
-position = Vector2(787, -71)
+position = Vector2(77, 101)
 player = NodePath("../Player/Spin")
 treeArea = NodePath("../TreeRoom/LightTree/TreeArea")
 dialogBox = NodePath("../Player/CanvasLayer2/DialogBox")
@@ -1692,11 +1652,16 @@ playerCamera = NodePath("../Player/Camera2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BigShroom"]
 shape = SubResource("CircleShape2D_e5kdt")
 
+[node name="ClickMe" parent="." instance=ExtResource("31_8ficn")]
+position = Vector2(88, 400)
+scale = Vector2(0.58, 0.58)
+
 [connection signal="area_entered" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_entered"]
 [connection signal="area_exited" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_exited"]
 [connection signal="area_entered" from="Player/PlayerCheckpointCollision" to="Player" method="_on_player_checkpoint_collision_area_entered"]
 [connection signal="pressed" from="CanvasLayer/Settings Button/TextureButton" to="CanvasLayer/Settings Button" method="_on_texture_button_pressed"]
 [connection signal="interacting" from="Tutorial/SpinnyPlant" to="Player" method="_on_spinny_plant_interacting"]
+[connection signal="interacting" from="Tutorial/SpinnyPlant" to="ClickMe" method="_on_spinny_plant_interacting"]
 [connection signal="interacting" from="Tutorial/SpinnyPlant2" to="Player" method="_on_spinny_plant_interacting"]
 [connection signal="interacting" from="Tutorial/SpinnyPlant10" to="Player" method="_on_spinny_plant_interacting"]
 [connection signal="interacting" from="Tutorial/SpinnyPlant11" to="Player" method="_on_spinny_plant_interacting"]

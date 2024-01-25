@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfy3lftkq72ky"]
+
+[ext_resource type="Script" path="res://TeleCam/CamRX.gd" id="1_gwpkn"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_1sun8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mjk3i"]
+radius = 6.08276
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d01km"]
+atlas = ExtResource("2_1sun8")
+region = Rect2(160, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs58b"]
+atlas = ExtResource("2_1sun8")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q3ms3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d01km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs58b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CamRx" type="Node2D"]
+script = ExtResource("1_gwpkn")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 2)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mjk3i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_q3ms3")
+
+[node name="MirrorClickDetect" type="Button" parent="."]
+visibility_layer = 0
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 9.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="pressed" from="MirrorClickDetect" to="." method="_on_mirror_click_detect_pressed"]
