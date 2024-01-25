@@ -789,7 +789,6 @@ treeSprite = NodePath("../TreeRoom/LightTree")
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
 tile_set = SubResource("TileSet_tht4b")
-rendering_quadrant_size = 20
 collision_visibility_mode = 1
 format = 2
 layer_0/name = "Floor"
@@ -1549,7 +1548,7 @@ distance = 50
 [node name="TreeRoom" type="Node2D" parent="."]
 
 [node name="LightTree" type="AnimatedSprite2D" parent="TreeRoom"]
-z_index = 1
+z_index = 2
 texture_filter = 1
 position = Vector2(166, -94)
 scale = Vector2(1.26, 1.26)
@@ -1566,90 +1565,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/LightTree/TreeArea"]
 position = Vector2(266, -98)
 shape = SubResource("RectangleShape2D_3k4cr")
-
-[node name="Flower2" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(123, -63)
-
-[node name="Flower3" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(148, -86)
-
-[node name="Flower4" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(178, -60)
-
-[node name="Flower5" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(148, -61)
-
-[node name="Flower6" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(114, -83)
-
-[node name="Flower7" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(128, -103)
-
-[node name="Flower8" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(145, -100)
-
-[node name="Flower9" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(136, -74)
-
-[node name="Flower10" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(166, -97)
-
-[node name="Flower11" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(195, -80)
-
-[node name="Flower12" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(198, -106)
-
-[node name="Flower13" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(174, -119)
-
-[node name="Flower14" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(146, -121)
-
-[node name="Flower15" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(122, -126)
-
-[node name="Flower16" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(101, -112)
-
-[node name="Flower17" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(93, -87)
-
-[node name="Flower18" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(98, -62)
-
-[node name="Flower19" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(93, -137)
-
-[node name="Flower20" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(139, -143)
-
-[node name="Flower21" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(171, -144)
-
-[node name="Flower22" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(201, -139)
-
-[node name="Flower23" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(215, -120)
-
-[node name="Flower24" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(217, -92)
-
-[node name="Flower25" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(211, -60)
-
-[node name="Flower26" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(171, -74)
-
-[node name="Flower27" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(187, -95)
-
-[node name="Flower28" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(222, -140)
-
-[node name="Flower29" parent="TreeRoom" instance=ExtResource("18_1djhq")]
-position = Vector2(227, -111)
 
 [node name="SpinnyPlant14" parent="TreeRoom" node_paths=PackedStringArray("player") groups=["Spinny"] instance=ExtResource("19_inqsl")]
 position = Vector2(84, -139)
@@ -1680,6 +1595,63 @@ distance = 50
 position = Vector2(471, -182)
 player = NodePath("../../Player/Camera2D")
 distance = 50
+
+[node name="DummyFlower" parent="TreeRoom" instance=ExtResource("19_8b2au")]
+position = Vector2(140, -60)
+priority = 1
+alwaysOn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower"]
+shape = SubResource("CircleShape2D_6k4d7")
+disabled = true
+
+[node name="DummyFlower2" parent="TreeRoom" instance=ExtResource("19_8b2au")]
+position = Vector2(177, -70)
+priority = 1
+alwaysOn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower2"]
+shape = SubResource("CircleShape2D_6k4d7")
+disabled = true
+
+[node name="DummyFlower3" parent="TreeRoom" instance=ExtResource("19_8b2au")]
+position = Vector2(159, -51)
+priority = 1
+alwaysOn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower3"]
+shape = SubResource("CircleShape2D_6k4d7")
+disabled = true
+
+[node name="DummyFlower4" parent="TreeRoom" instance=ExtResource("19_8b2au")]
+position = Vector2(144, -111)
+priority = 1
+LightRadius = 256
+alwaysOn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower4"]
+shape = SubResource("CircleShape2D_6k4d7")
+disabled = true
+
+[node name="DummyFlower5" parent="TreeRoom" instance=ExtResource("19_8b2au")]
+position = Vector2(214, -110)
+priority = 1
+LightRadius = 256
+alwaysOn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower5"]
+shape = SubResource("CircleShape2D_6k4d7")
+disabled = true
+
+[node name="DummyFlower6" parent="TreeRoom" instance=ExtResource("19_8b2au")]
+position = Vector2(118, -70)
+priority = 1
+LightRadius = 256
+alwaysOn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower6"]
+shape = SubResource("CircleShape2D_6k4d7")
+disabled = true
 
 [node name="BigShroom" parent="." node_paths=PackedStringArray("player", "treeArea", "dialogBox", "playerArea", "playerCamera") instance=ExtResource("29_7ccu2")]
 position = Vector2(787, -71)
