@@ -18,10 +18,12 @@ func _on_area_2d_area_exited(area):
 
 signal isButtonOn
 var isOn = false
+signal interacting
 func _on_mirror_click_detect_pressed():
 	var playerPos: Vector2 = camera.global_position
 	var box: Vector2 = self.global_position
 	if(sqrt(abs((box[0] - playerPos[0]) * (box[0] - playerPos[0]) + (box[1] - playerPos[1]) * (box[1] - playerPos[1]))) < 30):
 		isButtonOn.emit(isOn)
+		interacting.emit(true)
 		isOn = not isOn
 	pass

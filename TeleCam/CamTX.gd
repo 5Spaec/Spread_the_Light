@@ -39,6 +39,7 @@ func on():
 	shape.disabled = false
 	pointLight.visible = true
 
-
+signal interacting
 func _on_tx_click_detect_pressed():
 	switchCam.emit(global_position, false)
+	interacting.emit(true)

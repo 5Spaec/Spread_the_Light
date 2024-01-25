@@ -42,10 +42,10 @@ func _on_area_2d_area_entered(area):
 		
 	elif(area == treeArea):
 		picked = false
-		self.rotation = 0
 		call_deferred("deparent")
 		dialogBox.set_actor_name("Oriel")
 		dialogBox.queue_lines("You can put me down here... Just as I thought, my friend here just got tired. Go find my other two friends so we can spread light to this whole place once again!!")
+		self.rotation = 0
 		dialogBox.dialog_complete.connect(moveCamToDoor.bind())
 	elif area != $"." and not isDisabled:
 		areas.append(area)
@@ -58,9 +58,10 @@ func deparent():
 	
 func moveCamToDoor():
 	var tween = create_tween()
-	tween.tween_property(playerCamera, "position", to_local(doorPoint.global_position), 0.3).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(playerCamera, "global_position", doorPoint.global_position, 0.3).set_trans(Tween.TRANS_SINE)
 	var timer: Timer = Timer.new()
 	add_child(timer)
+	dialogBox.dialog_complete.disconnect(moveCamToDoor.bind())
 	timer.one_shot = true
 	timer.start(3)
 	timer.timeout.connect(resetPlayerCam.bind())
@@ -96,7 +97,7 @@ func start():
 	RXCollision.set_disabled(false)
 	isDisabled = false
 	
-
+signal interacting
 func _on_big_plant_detect_pressed():
 	print("clicked")
 	if(picked == false):
@@ -108,7 +109,10 @@ func _on_big_plant_detect_pressed():
 			picked = true
 			moved = true
 			self.reparent(player)
+			interacting.emit(true)
 	elif(picked == true):
 		print("put down")
 		picked = false
 		self.reparent($"/root")
+		interacting.emit(false)
+		

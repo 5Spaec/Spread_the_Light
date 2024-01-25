@@ -1,12 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcsid4sp65dqs"]
+[gd_scene load_steps=9 format=3 uid="uid://dcsid4sp65dqs"]
 
 [ext_resource type="Script" path="res://Menus/SettingsPannel.gd" id="1_xi3po"]
 [ext_resource type="Texture2D" uid="uid://dduwtmxtyrplc" path="res://Assets/GameTileset/Props/Darkness/0001.png" id="2_ttb54"]
 [ext_resource type="Texture2D" uid="uid://dyubqwc44n4s5" path="res://Assets/GUI Icons/MainMenu/Menu1.png" id="2_yhusb"]
 [ext_resource type="Texture2D" uid="uid://es38lml0ynj" path="res://Assets/GameTileset/Props/Darkness/0002.png" id="3_tr7ya"]
 [ext_resource type="Texture2D" uid="uid://coqtf027qfc7k" path="res://Assets/GUI Icons/MainMenu/Menu2.png" id="3_xuf8a"]
-[ext_resource type="Texture2D" uid="uid://d37y40gooy4g3" path="res://Assets/GUI Icons/LevelSelect/LevelSelect1.png" id="4_oqqum"]
-[ext_resource type="Texture2D" uid="uid://ccetn8w45wkiy" path="res://Assets/GUI Icons/LevelSelect/LevelSelect2.png" id="5_shxim"]
 [ext_resource type="Texture2D" uid="uid://baw0ktyvusnn" path="res://Assets/GUI Icons/Exit/Exit1.png" id="6_rsb4l"]
 [ext_resource type="Texture2D" uid="uid://cv3v7ev343o5u" path="res://Assets/GUI Icons/Exit/Exit2.png" id="7_dckdq"]
 
@@ -98,36 +96,26 @@ scroll_active = false
 
 [node name="MainMenuButton" type="TextureButton" parent="Panel"]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 160.0
-offset_right = 245.0
-offset_bottom = 208.0
+offset_left = 116.0
+offset_top = 193.0
+offset_right = 244.0
+offset_bottom = 241.0
 scale = Vector2(1.73, 1.73)
 texture_normal = ExtResource("2_yhusb")
 texture_pressed = ExtResource("2_yhusb")
 texture_hover = ExtResource("3_xuf8a")
 
-[node name="LevelSelectButton" type="TextureButton" parent="Panel"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 266.0
-offset_right = 248.0
-offset_bottom = 314.0
-scale = Vector2(1.73, 1.73)
-texture_normal = ExtResource("4_oqqum")
-texture_pressed = ExtResource("4_oqqum")
-texture_hover = ExtResource("5_shxim")
-
 [node name="ExitGameButton" type="TextureButton" parent="Panel"]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 377.0
-offset_right = 245.0
-offset_bottom = 425.0
+offset_left = 116.0
+offset_top = 296.0
+offset_right = 244.0
+offset_bottom = 344.0
 scale = Vector2(1.73, 1.73)
 texture_normal = ExtResource("6_rsb4l")
 texture_pressed = ExtResource("6_rsb4l")
 texture_hover = ExtResource("7_dckdq")
 
 [connection signal="value_changed" from="Panel/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Panel/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Panel/ExitGameButton" to="." method="_on_exit_game_button_pressed"]

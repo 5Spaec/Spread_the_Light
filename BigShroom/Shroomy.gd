@@ -9,15 +9,12 @@ extends Area2D
 @export var dialogBox: Control
 @export var playerArea: Area2D
 @export var playerCamera: Camera2D
-@export var doorPoint: Node2D
-@export var darknessAreaShape: CollisionShape2D
 var inLight = false
 @onready var TXCollision: CollisionShape2D = $CollisionShape2D
 @onready var RXCollision: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var Sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var light: PointLight2D = $PointLight2D
 @onready var timer: Timer = Timer.new()
-@onready var timer2: Timer = Timer.new()
 @onready var triggeredDarkness = false
 var picked = false
 var moved = false
@@ -30,48 +27,52 @@ func _ready():
 	TXCollision.set_disabled(false)
 	RXCollision.set_disabled(false)
 	timer.one_shot = true
-	timer2.one_shot = true
 	add_child(timer)
-	add_child(timer2)
 
 
 
 var screenPan = false
 func _on_area_2d_area_entered(area):
 	if(playerdialog1 == false) and (area == playerArea):
-		dialogBox.set_actor_name("Ron (press/hold space)")
-		dialogBox.queue_lines("Orial Called for MEEEE!?! Oh my gosh, This is my big DAY!")
+		dialogBox.set_actor_name("Ronny (press/hold space)")
+		dialogBox.queue_lines("Ahh I see... My brother called for me... Friend is eeping... Alright take me to the tree *sigh*")
 		playerdialog1 = true
 		
 	elif(area == treeArea):
 		picked = false
 		screenPan = true
 		deparent()
-		dialogBox.set_actor_name("Ron")
-		dialogBox.queue_lines("HI ORIEL!! *Ahem* hello, I see that the light giving tree has gone back to sleep, go get my brother ronny and we can wake this guy up again! *Thinks* ~~Finally some alone time with Oriel~~")
+		dialogBox.set_actor_name("Ronny")
+		dialogBox.queue_lines("Sup Ron... I see that this goober fell asleep. No wonder it is so dark *cough* Lets get this over with *yawn*")
 		self.rotation = 0
-		dialogBox.dialog_complete.connect(moveCamToDoor.bind())
+		dialogBox.dialog_complete.connect(dialog.bind())
 
 func deparent():
 	self.reparent($"/root")
 	
-func moveCamToDoor():
-	if(screenPan == true):
-		var tween = create_tween()
-		tween.tween_property(playerCamera, "global_position", doorPoint.global_position, 0.3).set_trans(Tween.TRANS_SINE)
-		timer.start(3)
-		timer.timeout.connect(resetPlayerCam.bind())
-		dialogBox.dialog_complete.disconnect(moveCamToDoor.bind())
 	
-func resetPlayerCam():
-	var tween = create_tween()
-	tween.tween_property(playerCamera, "position", Vector2(0, 0), 0.3).set_trans(Tween.TRANS_SINE)
+func dialog():
+	dialogBox.dialog_complete.disconnect(dialog.bind())
+	dialogBox.set_actor_name("Ronny")
+	dialogBox.queue_lines("Wakey Wakey")
+	dialogBox.dialog_complete.connect(dialog1.bind())
 
-
-		
-		
-
-
+func dialog1():
+	dialogBox.dialog_complete.disconnect(dialog1.bind())
+	dialogBox.set_actor_name("Ron")
+	dialogBox.queue_lines("Eggs")
+	dialogBox.dialog_complete.connect(dialog2.bind())
+	
+func dialog2():
+	dialogBox.dialog_complete.disconnect(dialog2.bind())
+	dialogBox.set_actor_name("Oriel")
+	dialogBox.queue_lines("and Bakey")
+	dialogBox.dialog_complete.connect(dialog3.bind())
+	
+signal FinishGame
+func dialog3():
+	FinishGame.emit()
+	
 func on():
 	inLight = true
 	TXCollision.set_disabled(false)
@@ -87,15 +88,8 @@ func _on_big_plant_detect_pressed():
 			picked = true
 			moved = true
 			self.reparent(player)
-			timer2.start(3)
-			timer2.timeout.connect(disableLight.bind())
 	elif(picked == true):
 		print("put down")
 		picked = false
 		self.reparent($"/root")
 
-func disableLight():
-	var tween = create_tween()
-	tween.tween_property(darknessAreaShape, "position", Vector2(-10000, 5000), 6).set_trans(Tween.TRANS_SINE)
-	dialogBox.set_actor_name("Ron")
-	dialogBox.queue_lines("Oh no the lights went out! Im scared of the Dark...")

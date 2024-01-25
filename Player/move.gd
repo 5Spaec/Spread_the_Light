@@ -5,16 +5,19 @@ extends CharacterBody2D
 @export var audio: AudioStreamPlayer2D
 @export var sprite: AnimatedSprite2D
 @export var particles: GPUParticles2D
+@export var dialogBox: Control
 @onready var speedCopy = speed
 @onready var zoomCopy = camera.zoom
 @onready var inLight = true
 @onready var rand: RandomNumberGenerator = RandomNumberGenerator.new()
 @onready var checkpointPos: Vector2 = self.global_position
 @onready var timer: Timer = Timer.new()
+var interacts = []
 func _ready():
 	add_child(timer)
 	timer.timeout.connect(die.bind())
-	#$CanvasLayer2/DialogBox.queue_lines("howddddddddddddddddyyyyyyyyyy!!!!!!!!!!")
+	dialogBox.set_actor_name("You (press/hold space)")
+	dialogBox.queue_lines("How did I get here?? Why is it so dark??")
 	pass
 
 func _process(delta):
@@ -59,11 +62,14 @@ func _physics_process(delta):
 
 func _on_spinny_plant_interacting(isInteracting: bool):
 	if(isInteracting):
+		interacts.append(0)
 		speed = 0
 		var tween = create_tween()
 		tween.tween_property(camera, "zoom", Vector2(3.5, 3.5), 0.3).set_trans(Tween.TRANS_SINE)
 	else:
-		speed = speedCopy
+		interacts.pop_back()
+		if(interacts.is_empty()):
+			speed = speedCopy
 		var tween = create_tween()
 		tween.tween_property(camera, "zoom", zoomCopy, 0.3).set_trans(Tween.TRANS_SINE)
 
@@ -93,7 +99,8 @@ func _on_player_mirror_detect_area_exited(area):
 		playerLight.emit(false)
 		audio.play()
 		AudioServer.set_bus_volume_db(2, -72)
-		timer.start(9.75)
+		#timer.start(9.75)
+		timer.start(3)
 		particles.visible = true
 		particles.emitting = true
 		
@@ -113,10 +120,13 @@ func _on_player_checkpoint_collision_area_entered(area):
 func _on_cam_tx_switch_cam(pos: Vector2, sendPlayer: bool):
 	if(sendPlayer):
 		speed = 0
+		interacts.append(1)
 		var tween = create_tween()
 		tween.tween_property(camera, "position", to_local(pos), 0.3).set_trans(Tween.TRANS_SINE)
 	else:
-		speed = speedCopy
+		interacts.pop_back()
+		if(interacts.is_empty()):
+			speed = speedCopy
 		var tween = create_tween()
 		tween.tween_property(camera, "position", Vector2(0,0), 0.3).set_trans(Tween.TRANS_SINE)
 	pass
