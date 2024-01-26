@@ -49,14 +49,9 @@ func dialog2():
 func dialog3():
 	dialogBox.dialog_complete.disconnect(dialog3.bind())
 	dialogBox.set_actor_name("Sir Barret")
-	dialogBox.queue_lines("Hey kid, I’m not just “some plant.” You’re talking to Sir Barret, son of Harman the Great. I don’t have much time for chit chat, I need you to turn me to shine at my brother over in the darkness")
-	dialogBox.dialog_complete.connect(dialog4.bind())
+	dialogBox.queue_lines("Hey kid, I’m not just “some plant.” You’re talking to Sir Barret, son of Harman the Great. I don’t have much time for chit chat, I need you to turn me to shine at my brother over in the darkness and follow the light")
 	speed = speedCopy
-func dialog4():
-	dialogBox.dialog_complete.disconnect(dialog4.bind())
-	dialogBox.set_actor_name("Sir Barret")
-	dialogBox.queue_lines("After that, follow the light, and feel free to rotate any of my brothers you find to help.")
-	#dialogBox.dialog_complete.connect(dialog4.bind())
+
 	
 func _process(delta):
 	var offsetNum = 0.4

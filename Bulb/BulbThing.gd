@@ -112,5 +112,5 @@ func _on_big_plant_detect_pressed():
 func disableLight():
 	var tween = create_tween()
 	tween.tween_property(darknessAreaShape, "position", Vector2(-10000, 5000), 6).set_trans(Tween.TRANS_SINE)
-	dialogBox.set_actor_name("Ron")
+	dialogBox.set_actor_name("Reginald")
 	dialogBox.queue_lines("Oh no the lights went out! Im scared of the Dark...")

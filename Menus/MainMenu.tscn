@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dob4fbpmoliq5" path="res://Assets/GUI Icons/MainMenu/Start_Hover.png" id="4_rgjlc"]
 [ext_resource type="Texture2D" uid="uid://w2lq2gyh6k6q" path="res://Assets/GUI Icons/MainMenu/Quit_Idle.png" id="5_y41wa"]
 [ext_resource type="Texture2D" uid="uid://bp6qok66cs4tf" path="res://Assets/GUI Icons/MainMenu/Quit_Hover.png" id="6_fvkuf"]
-[ext_resource type="AudioStream" uid="uid://d2aiamof6vogf" path="res://Assets/Audio/scott-buckley-moonlight(chosic.com).mp3" id="7_1i0v2"]
+[ext_resource type="AudioStream" uid="uid://o72o2vv081g6" path="res://Assets/Audio/Title.mp3" id="7_t4yaj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqf0q"]
 atlas = ExtResource("1_gicif")
@@ -177,7 +177,7 @@ texture_hover = ExtResource("6_fvkuf")
 position = Vector2(577, 325)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_1i0v2")
+stream = ExtResource("7_t4yaj")
 volume_db = -17.578
 autoplay = true
 

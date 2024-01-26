@@ -61,7 +61,7 @@ func dialogB():
 func dialogC():
 	dialogBox.dialog_complete.disconnect(dialogC.bind())
 	dialogBox.set_actor_name("Gelic")
-	dialogBox.queue_lines("Then what are we waiting for?! Pull me out of this dirt, I’ve probably been here too long anyway.")
+	dialogBox.queue_lines("Then what are we waiting for?! Pull me out of the ground, I’ve probably been here for too long anyway.")
 	#dialogBox.dialog_complete.connect(dialogC.bind())
 
 func deparent():
