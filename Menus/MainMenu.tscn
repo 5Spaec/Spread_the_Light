@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://4bb5hvdeeu3b"]
+[gd_scene load_steps=25 format=3 uid="uid://4bb5hvdeeu3b"]
 
 [ext_resource type="Texture2D" uid="uid://be6b5xoo2cqca" path="res://Menus/MainMenuSpriteSheet.png" id="1_gicif"]
 [ext_resource type="Script" path="res://Menus/MainMenu.gd" id="1_k7hhy"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dob4fbpmoliq5" path="res://Assets/GUI Icons/MainMenu/Start_Hover.png" id="4_rgjlc"]
 [ext_resource type="Texture2D" uid="uid://w2lq2gyh6k6q" path="res://Assets/GUI Icons/MainMenu/Quit_Idle.png" id="5_y41wa"]
 [ext_resource type="Texture2D" uid="uid://bp6qok66cs4tf" path="res://Assets/GUI Icons/MainMenu/Quit_Hover.png" id="6_fvkuf"]
+[ext_resource type="AudioStream" uid="uid://d2aiamof6vogf" path="res://Assets/Audio/scott-buckley-moonlight(chosic.com).mp3" id="7_1i0v2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqf0q"]
 atlas = ExtResource("1_gicif")
@@ -145,35 +146,40 @@ follow_viewport_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
 position = Vector2(576, 324)
-scale = Vector2(4.8, 4.8)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xgylb")
 animation = &"Menu_Gif"
 autoplay = "Menu_Gif"
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = -290.0
-offset_top = 99.0
-offset_right = -140.0
-offset_bottom = 164.0
-scale = Vector2(4.455, 4.01)
+offset_left = -101.0
+offset_top = 205.0
+offset_right = 49.0
+offset_bottom = 270.0
+scale = Vector2(2.765, 2.489)
 texture_normal = ExtResource("3_tg5dv")
 texture_pressed = ExtResource("4_rgjlc")
 texture_hover = ExtResource("4_rgjlc")
 
 [node name="TextureButton2" type="TextureButton" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = -293.0
-offset_top = 391.0
-offset_right = -143.0
-offset_bottom = 456.0
-scale = Vector2(4.455, 4.01)
+offset_left = -113.0
+offset_top = 404.0
+offset_right = 37.0
+offset_bottom = 469.0
+scale = Vector2(2.82, 2.538)
 texture_normal = ExtResource("5_y41wa")
 texture_pressed = ExtResource("6_fvkuf")
 texture_hover = ExtResource("6_fvkuf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 325)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1i0v2")
+volume_db = -17.578
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TextureButton2" to="." method="_on_texture_button_2_pressed"]

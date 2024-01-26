@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://div88yh28cqmf"
-path.s3tc="res://.godot/imported/pointer.png-62b45d0fd9eb70097b251bdfab884137.s3tc.ctex"
+path.s3tc="res://.godot/imported/pointer.png-365fee2970064d8e08497f598dc9850a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/GoBox/textures/pointer.png"
-dest_files=["res://.godot/imported/pointer.png-62b45d0fd9eb70097b251bdfab884137.s3tc.ctex"]
+source_file="res://addons/gobox/textures/pointer.png"
+dest_files=["res://.godot/imported/pointer.png-365fee2970064d8e08497f598dc9850a.s3tc.ctex"]
 
 [params]
 

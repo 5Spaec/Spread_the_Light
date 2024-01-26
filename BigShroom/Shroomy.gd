@@ -34,18 +34,35 @@ func _ready():
 var screenPan = false
 func _on_area_2d_area_entered(area):
 	if(playerdialog1 == false) and (area == playerArea):
-		dialogBox.set_actor_name("Ronny (press/hold space)")
-		dialogBox.queue_lines("Ahh I see... My brother called for me... Friend is eeping... Alright take me to the tree *sigh*")
+		dialogA()
 		playerdialog1 = true
 		
 	elif(area == treeArea):
 		picked = false
 		screenPan = true
 		deparent()
-		dialogBox.set_actor_name("Ronny")
-		dialogBox.queue_lines("Sup Ron... I see that this goober fell asleep. No wonder it is so dark *cough* Lets get this over with *yawn*")
+		dialogBox.set_actor_name("Oriel")
+		dialogBox.queue_lines("Quick everybody, speak our sacred words so that we may wake the sacred King of Light and finally spread light throughout the land.")
 		self.rotation = 0
 		dialogBox.dialog_complete.connect(dialog.bind())
+
+func dialogA():
+	dialogBox.dialog_complete.disconnect(dialogA.bind())
+	dialogBox.set_actor_name("Gelic")
+	dialogBox.queue_lines("Hello young man! My name is Gelic. *Yawns* How long was I sleeping for?")
+	dialogBox.dialog_complete.connect(dialogB.bind())
+
+func dialogB():
+	dialogBox.dialog_complete.disconnect(dialogB.bind())
+	dialogBox.set_actor_name("You")
+	dialogBox.queue_lines("I don’t know, but Oriel said I needed to take you back to the tree room.")
+	dialogBox.dialog_complete.connect(dialogC.bind())
+
+func dialogC():
+	dialogBox.dialog_complete.disconnect(dialogC.bind())
+	dialogBox.set_actor_name("Gelic")
+	dialogBox.queue_lines("Then what are we waiting for?! Pull me out of this dirt, I’ve probably been here too long anyway.")
+	#dialogBox.dialog_complete.connect(dialogC.bind())
 
 func deparent():
 	self.reparent($"/root")
@@ -71,6 +88,7 @@ func dialog2():
 	
 signal FinishGame
 func dialog3():
+	dialogBox.dialog_complete.disconnect(dialog3.bind())
 	FinishGame.emit()
 	
 func on():

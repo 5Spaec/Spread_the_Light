@@ -1,10 +1,13 @@
-[gd_scene load_steps=75 format=3 uid="uid://cr8irfyseoksg"]
+[gd_scene load_steps=78 format=3 uid="uid://cr8irfyseoksg"]
 
 [ext_resource type="Script" path="res://Player/move.gd" id="1_mhxbo"]
 [ext_resource type="Script" path="res://MainLevel/EndingLight.gd" id="1_qcifo"]
+[ext_resource type="AudioStream" uid="uid://dkwf5ek77a24e" path="res://Assets/Audio/level-win-6416.mp3" id="2_qsq6x"]
 [ext_resource type="Texture2D" uid="uid://c4y6jmx17igwl" path="res://Assets/GameTileset/Custom_TileSet/Character Sprite.png" id="2_v3w1k"]
 [ext_resource type="AudioStream" uid="uid://bcuoeef5ydpyr" path="res://Assets/Audio/HeartBeat.mp3" id="3_l14df"]
 [ext_resource type="Script" path="res://Player/CharacterRotate.gd" id="4_2megs"]
+[ext_resource type="AudioStream" uid="uid://bqmeu43yoxf6q" path="res://Assets/Audio/concrete-footsteps.mp3" id="6_lqj40"]
+[ext_resource type="AudioStream" uid="uid://b5m4y0ts82su4" path="res://Assets/Audio/PlantInteraction.mp3" id="7_1kli3"]
 [ext_resource type="Texture2D" uid="uid://bn0pdmbt1tx53" path="res://Assets/GameTileset/Props/NotFuzzies/NotFuzzies1.png" id="7_qpwrs"]
 [ext_resource type="Texture2D" uid="uid://dx8c26r1xppy3" path="res://Assets/GameTileset/Props/NotFuzzies/NotFuzzies2.png" id="8_kq31n"]
 [ext_resource type="Script" path="res://Menus/SettingsButton.gd" id="9_0xo3a"]
@@ -779,12 +782,20 @@ radius = 32.0156
 
 [node name="MainLevel" type="Node2D"]
 
-[node name="EndingLight" type="PointLight2D" parent="." node_paths=PackedStringArray("treeSprite")]
+[node name="EndingLight" type="PointLight2D" parent="." node_paths=PackedStringArray("treeSprite", "worldLight", "winSound", "dialogBox")]
 position = Vector2(145, -89)
 energy = 0.0
 texture = SubResource("GradientTexture2D_2lspl")
 script = ExtResource("1_qcifo")
 treeSprite = NodePath("../TreeRoom/LightTree")
+worldLight = NodePath("../DirectionalLight2D")
+winSound = NodePath("YouWinSound")
+dialogBox = NodePath("../Player/CanvasLayer2/DialogBox")
+
+[node name="YouWinSound" type="AudioStreamPlayer" parent="EndingLight"]
+stream = ExtResource("2_qsq6x")
+volume_db = -17.0
+bus = &"VFX"
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -802,7 +813,7 @@ layer_3/tile_data = PackedInt32Array()
 layer_4/name = "Decor"
 layer_4/tile_data = PackedInt32Array(4, 524288, 1, 720905, 524288, 2, 1966089, 524288, 2, 1900553, 524288, 2, 1966088, 524288, 2, 1638400, 524288, 2, 1703936, 524288, 2, 1376265, 524288, 2, 1310729, 524288, 2, -2490357, 589824, 14, -2424821, 589824, 15, -2490356, 655360, 14, -2424820, 655360, 15)
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "audio", "sprite", "particles", "dialogBox")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "audio", "walkAudio", "plantAudio", "sprite", "particles", "dialogBox")]
 unique_name_in_owner = true
 position = Vector2(58, 460)
 collision_layer = 129
@@ -810,6 +821,8 @@ script = ExtResource("1_mhxbo")
 speed = 40
 camera = NodePath("Camera2D")
 audio = NodePath("AudioStreamPlayer2D")
+walkAudio = NodePath("WalkSound")
+plantAudio = NodePath("PlantClick")
 sprite = NodePath("CollisionShape2D/playerSprite")
 particles = NodePath("CanvasLayer/Spook Particles")
 dialogBox = NodePath("CanvasLayer2/DialogBox")
@@ -845,6 +858,14 @@ shape = SubResource("CircleShape2D_dk48h")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("3_l14df")
+bus = &"VFX"
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("6_lqj40")
+bus = &"VFX"
+
+[node name="PlantClick" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("7_1kli3")
 bus = &"VFX"
 
 [node name="PlayerCheckpointCollision" type="Area2D" parent="Player"]
@@ -930,7 +951,7 @@ visible = false
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_1g4n4")
-volume_db = -10.0
+volume_db = -17.0
 autoplay = true
 bus = &"Music"
 script = ExtResource("14_jidgr")
@@ -1099,24 +1120,10 @@ position = Vector2(134, -293)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="DummyFlower2" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(97, -310)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower2"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
 [node name="DummyFlower3" parent="Maze" instance=ExtResource("19_8b2au")]
 position = Vector2(53, -294)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower3"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower4" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(3, -302)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower4"]
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
@@ -1127,24 +1134,10 @@ position = Vector2(-40, -308)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="DummyFlower25" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-50, -242)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower25"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
 [node name="DummyFlower26" parent="Maze" instance=ExtResource("19_8b2au")]
 position = Vector2(-44, -185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower26"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower27" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-55, -138)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower27"]
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
@@ -1155,24 +1148,10 @@ position = Vector2(-95, -105)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="DummyFlower29" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-112, -157)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower29"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
 [node name="DummyFlower30" parent="Maze" instance=ExtResource("19_8b2au")]
 position = Vector2(-111, -203)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower30"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower31" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-81, -190)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower31"]
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
@@ -1183,31 +1162,10 @@ position = Vector2(-15, -375)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="DummyFlower33" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-20, -419)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower33"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
 [node name="DummyFlower34" parent="Maze" instance=ExtResource("19_8b2au")]
 position = Vector2(24, -422)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower34"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower35" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(24, -422)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower35"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower6" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-48, -341)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower6"]
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
@@ -1218,45 +1176,10 @@ position = Vector2(-70, -366)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="DummyFlower8" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-109, -375)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower8"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower9" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-109, -412)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower9"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
 [node name="DummyFlower10" parent="Maze" instance=ExtResource("19_8b2au")]
 position = Vector2(-107, -449)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower10"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower11" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-70, -461)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower11"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower12" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-46, -486)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower12"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower13" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-48, -524)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower13"]
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
@@ -1267,24 +1190,10 @@ position = Vector2(-48, -563)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="DummyFlower15" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-88, -576)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower15"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
 [node name="DummyFlower16" parent="Maze" instance=ExtResource("19_8b2au")]
 position = Vector2(-119, -575)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower16"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower17" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-162, -575)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower17"]
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
@@ -1295,24 +1204,10 @@ position = Vector2(-201, -574)
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
-[node name="DummyFlower19" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-247, -575)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower19"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
 [node name="DummyFlower20" parent="Maze" instance=ExtResource("19_8b2au")]
 position = Vector2(-294, -574)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower20"]
-shape = SubResource("CircleShape2D_6k4d7")
-disabled = true
-
-[node name="DummyFlower21" parent="Maze" instance=ExtResource("19_8b2au")]
-position = Vector2(-343, -572)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Maze/DummyFlower21"]
 shape = SubResource("CircleShape2D_6k4d7")
 disabled = true
 
@@ -1626,7 +1521,6 @@ disabled = true
 [node name="DummyFlower4" parent="TreeRoom" instance=ExtResource("19_8b2au")]
 position = Vector2(144, -111)
 priority = 1
-LightRadius = 256
 alwaysOn = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower4"]
@@ -1636,7 +1530,6 @@ disabled = true
 [node name="DummyFlower5" parent="TreeRoom" instance=ExtResource("19_8b2au")]
 position = Vector2(214, -110)
 priority = 1
-LightRadius = 256
 alwaysOn = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower5"]
@@ -1646,7 +1539,6 @@ disabled = true
 [node name="DummyFlower6" parent="TreeRoom" instance=ExtResource("19_8b2au")]
 position = Vector2(118, -70)
 priority = 1
-LightRadius = 256
 alwaysOn = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeRoom/DummyFlower6"]
@@ -1664,6 +1556,7 @@ playerCamera = NodePath("../Player/Camera2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BigShroom"]
 shape = SubResource("CircleShape2D_e5kdt")
 
+[connection signal="gameOver" from="EndingLight" to="Player" method="_on_ending_light_game_over"]
 [connection signal="area_entered" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_entered"]
 [connection signal="area_exited" from="Player/PlayerMirrorDetect" to="Player" method="_on_player_mirror_detect_area_exited"]
 [connection signal="area_entered" from="Player/PlayerCheckpointCollision" to="Player" method="_on_player_checkpoint_collision_area_entered"]

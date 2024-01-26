@@ -39,29 +39,44 @@ func _ready():
 var screenPan = false
 func _on_area_2d_area_entered(area):
 	if(playerdialog1 == false) and (area == playerArea):
-		dialogBox.set_actor_name("Ron (press/hold space)")
-		dialogBox.queue_lines("Orial Called for MEEEE!?! Oh my gosh, This is my big DAY!")
+		dialog()
 		playerdialog1 = true
 		
 	elif(area == treeArea):
 		picked = false
 		screenPan = true
 		deparent()
-		dialogBox.set_actor_name("Ron")
-		dialogBox.queue_lines("HI ORIEL!! *Ahem* hello, I see that the light giving tree has gone back to sleep, go get my brother ronny and we can wake this guy up again! *Thinks* ~~Finally some alone time with Oriel~~")
+		dialogBox.set_actor_name("Reginald")
+		dialogBox.queue_lines("Thanks for bringing me here. Just one more to go! Please Hurry!")
 		self.rotation = 0
 		dialogBox.dialog_complete.connect(moveCamToDoor.bind())
 
+func dialog():
+	dialogBox.dialog_complete.disconnect(dialog.bind())
+	dialogBox.set_actor_name("Reginald")
+	dialogBox.queue_lines("Why hello there! My name is Reginald. What do you need from me my child?")
+	dialogBox.dialog_complete.connect(dialog1.bind())
+
+func dialog1():
+	dialogBox.dialog_complete.disconnect(dialog1.bind())
+	dialogBox.set_actor_name("You")
+	dialogBox.queue_lines("Oriel said she needed me to take you to the tree room.")
+	dialogBox.dialog_complete.connect(dialog2.bind())
+func dialog2():
+	dialogBox.dialog_complete.disconnect(dialog2.bind())
+	dialogBox.set_actor_name("Reginald")
+	dialogBox.queue_lines("Well then, we must make haste. Uproot me so that we may continue. ")
+	#dialogBox.dialog_complete.connect(dialog2.bind())
 func deparent():
 	self.reparent($"/root")
 	
 func moveCamToDoor():
 	if(screenPan == true):
+		dialogBox.dialog_complete.disconnect(moveCamToDoor.bind())
 		var tween = create_tween()
 		tween.tween_property(playerCamera, "global_position", doorPoint.global_position, 0.3).set_trans(Tween.TRANS_SINE)
 		timer.start(3)
 		timer.timeout.connect(resetPlayerCam.bind())
-		dialogBox.dialog_complete.disconnect(moveCamToDoor.bind())
 	
 func resetPlayerCam():
 	var tween = create_tween()

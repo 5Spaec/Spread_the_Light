@@ -12,9 +12,8 @@ var isDisabled = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	call_deferred("off")
-	light.texture.width = LightRadius
-	light.texture.height = LightRadius
-		
+	
+	light.height = LightRadius/64
 	call_deferred("start")
 	if alwaysOn:
 		call_deferred("on")
