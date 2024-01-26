@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://birtquyc6le8e"]
 
 [ext_resource type="Script" path="res://Mirror/enteredLightSignal.gd" id="1_aw0ck"]
-[ext_resource type="Texture2D" uid="uid://d002taxui77qx" path="res://Assets/GameTileset/Props/LightGradient/LightGradient.png" id="3_dpn72"]
+[ext_resource type="Texture2D" uid="uid://bdxkw1irw3jns" path="res://Assets/GameTileset/Props/LightGradient/LightGradientV2.png" id="3_bl8g4"]
 [ext_resource type="Texture2D" uid="uid://cfoqxuvl8whea" path="res://Assets/GameTileset/Props/Light/0001.png" id="4_xelpd"]
 [ext_resource type="Script" path="res://Mirror/DynamicLight.gd" id="5_ha2pq"]
 
@@ -58,14 +58,14 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D/Area2D"]
-one_way_collision_margin = 0.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -9.05)
 rotation = 1.5708
 scale = Vector2(1, 0.195)
 color = Color(0.823529, 0.843137, 0.647059, 1)
-texture = ExtResource("3_dpn72")
+energy = 0.8
+texture = ExtResource("3_bl8g4")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="PointLight2D"]
 material = SubResource("CanvasItemMaterial_uaqhu")

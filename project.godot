@@ -11,13 +11,23 @@ config_version=5
 [application]
 
 config/name="Spread the Light"
-run/main_scene="res://MainLevel/MainLevel.tscn"
+run/main_scene="res://Menus/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="res://Assets/GUI Icons/Icon/icon.png"
+
+[display]
+
+window/size/mode=3
+window/size/resizable=false
 
 [dotnet]
 
 project/assembly_name="Spread the Light"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gobox/plugin.cfg")
 
 [input]
 
@@ -50,3 +60,11 @@ move_down={
 
 2d_physics/layer_2="Light"
 2d_physics/layer_4="Checkpoints"
+2d_physics/layer_5="Dummy"
+2d_physics/layer_6="Door"
+2d_physics/layer_7="TreeArea"
+2d_physics/layer_8="PlayerArea"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

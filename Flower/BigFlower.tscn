@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://d073ujrvigkld"]
+
+[ext_resource type="Script" path="res://Flower/BigFlower.gd" id="1_0juxg"]
+[ext_resource type="Texture2D" uid="uid://d25ab43m6lfeb" path="res://Assets/GameTileset/Custom_TileSet/Environment_TileSet.png" id="2_uadxq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lusnl"]
+atlas = ExtResource("2_uadxq")
+region = Rect2(80, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75mqu"]
+atlas = ExtResource("2_uadxq")
+region = Rect2(80, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ramuk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lusnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75mqu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gy85a"]
+radius = 16.1245
+
+[sub_resource type="Gradient" id="Gradient_b5o8g"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fo1x"]
+gradient = SubResource("Gradient_b5o8g")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Flower" type="Area2D"]
+collision_layer = 34
+collision_mask = 0
+script = ExtResource("1_0juxg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_ramuk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 194
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_gy85a")
+disabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.7
+texture = SubResource("GradientTexture2D_5fo1x")
+
+[node name="BigPlantDetect" type="Button" parent="."]
+visibility_layer = 0
+offset_left = -13.0
+offset_top = -19.0
+offset_right = 14.0
+offset_bottom = 11.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="pressed" from="BigPlantDetect" to="." method="_on_big_plant_detect_pressed"]

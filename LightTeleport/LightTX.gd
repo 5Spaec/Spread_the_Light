@@ -12,7 +12,6 @@ func _ready():
 	call_deferred("off")
 	pointLight.texture.width = lightRadius
 	pointLight.texture.height = lightRadius
-	shape.shape.radius = lightRadius/2
 	pass
 
 

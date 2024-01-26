@@ -1,0 +1,106 @@
+[gd_scene load_steps=16 format=3 uid="uid://cphg2ire2ayr4"]
+
+[ext_resource type="Texture2D" uid="uid://cwg8lsgd8olbh" path="res://Assets/GameTileset/Props/Signs/ClickHere.png" id="1_l4wtw"]
+[ext_resource type="Script" path="res://ClickMe/ClickMe.gd" id="2_wtkni"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4gje"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5sva"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcaon"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(160, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lpfd"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(240, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jl5j"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(320, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tkk0"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(400, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hm35"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(480, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0elv"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(560, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yom6p"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(640, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exhk1"]
+atlas = ExtResource("1_l4wtw")
+region = Rect2(720, 0, 80, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nv5je"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4gje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5sva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcaon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lpfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jl5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tkk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hm35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0elv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yom6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exhk1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_hnsyt"]
+colors = PackedColorArray(0.699653, 0.699653, 0.699653, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3dsp6"]
+gradient = SubResource("Gradient_hnsyt")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="ClickMe" type="AnimatedSprite2D"]
+light_mask = 2
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_nv5je")
+autoplay = "default"
+frame_progress = 0.70301
+script = ExtResource("2_wtkni")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(1.3, 1.3)
+energy = 1.89
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_3dsp6")
