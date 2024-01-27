@@ -1,12 +1,17 @@
-[gd_scene load_steps=25 format=3 uid="uid://4bb5hvdeeu3b"]
+[gd_scene load_steps=30 format=3 uid="uid://4bb5hvdeeu3b"]
 
 [ext_resource type="Texture2D" uid="uid://be6b5xoo2cqca" path="res://Menus/MainMenuSpriteSheet.png" id="1_gicif"]
 [ext_resource type="Script" path="res://Menus/MainMenu.gd" id="1_k7hhy"]
 [ext_resource type="Texture2D" uid="uid://o84e2hp8fiv0" path="res://Assets/GUI Icons/MainMenu/Start_Idle.png" id="3_tg5dv"]
+[ext_resource type="Texture2D" uid="uid://gvlbhuyo542e" path="res://Assets/GUI Icons/MainMenu/logo.png" id="3_xw3o5"]
 [ext_resource type="Texture2D" uid="uid://dob4fbpmoliq5" path="res://Assets/GUI Icons/MainMenu/Start_Hover.png" id="4_rgjlc"]
 [ext_resource type="Texture2D" uid="uid://w2lq2gyh6k6q" path="res://Assets/GUI Icons/MainMenu/Quit_Idle.png" id="5_y41wa"]
 [ext_resource type="Texture2D" uid="uid://bp6qok66cs4tf" path="res://Assets/GUI Icons/MainMenu/Quit_Hover.png" id="6_fvkuf"]
 [ext_resource type="AudioStream" uid="uid://o72o2vv081g6" path="res://Assets/Audio/Title.mp3" id="7_t4yaj"]
+[ext_resource type="Texture2D" uid="uid://dj7cs5skxf8bs" path="res://Assets/GUI Icons/MainMenu/Credits2.png" id="8_8riij"]
+[ext_resource type="Texture2D" uid="uid://d1rkd5yisp8x5" path="res://Assets/GUI Icons/MainMenu/Credits1.png" id="9_3674l"]
+[ext_resource type="FontFile" uid="uid://c48qmfycr3x1b" path="res://Assets/New folde/Orange Kid.ttf" id="9_nig6p"]
+[ext_resource type="Script" path="res://Menus/CreditsButton.gd" id="10_i85pn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqf0q"]
 atlas = ExtResource("1_gicif")
@@ -144,12 +149,19 @@ metadata/_edit_use_anchors_ = true
 follow_viewport_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+z_index = -1
 texture_filter = 1
 position = Vector2(576, 324)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xgylb")
 animation = &"Menu_Gif"
 autoplay = "Menu_Gif"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(165.75, -107.5)
+scale = Vector2(0.571429, 0.571429)
+texture = ExtResource("3_xw3o5")
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
 texture_filter = 1
@@ -165,13 +177,71 @@ texture_hover = ExtResource("4_rgjlc")
 [node name="TextureButton2" type="TextureButton" parent="CanvasLayer"]
 texture_filter = 1
 offset_left = -113.0
-offset_top = 404.0
+offset_top = 353.0
 offset_right = 37.0
-offset_bottom = 469.0
+offset_bottom = 418.0
 scale = Vector2(2.82, 2.538)
 texture_normal = ExtResource("5_y41wa")
 texture_pressed = ExtResource("6_fvkuf")
 texture_hover = ExtResource("6_fvkuf")
+
+[node name="TextureButton3" type="TextureButton" parent="CanvasLayer" node_paths=PackedStringArray("pannel")]
+texture_filter = 1
+offset_left = -62.0
+offset_top = 527.0
+offset_right = 25.0
+offset_bottom = 561.0
+scale = Vector2(4.2, 4.2)
+texture_normal = ExtResource("8_8riij")
+texture_pressed = ExtResource("8_8riij")
+texture_hover = ExtResource("9_3674l")
+script = ExtResource("10_i85pn")
+pannel = NodePath("../Control")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 456.0
+offset_top = -76.0
+offset_right = 1242.0
+offset_bottom = 748.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.345098, 0.345098, 0.345098, 0.517647)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_nig6p")
+theme_override_font_sizes/normal_font_size = 43
+bbcode_enabled = true
+text = "[center]Spread The Light
+
+Art and Level Design
+Justin Spere
+
+Programming
+Shlok Bhakta
+
+relaxing-music-part-1:  Music by Piotr Witowski from Pixabay
+concrete-footsteps: Sound Effect from Pixabay
+Plant Interaction Sound: Sound Effect from Pixabay
+Level-Win: Sound Effect from Pixabay
+cruising-down-8bit-lane: Music by Oleksii Holubiev from Pixabay
+little-slimex27s-adventure: Music by Spencer Y.K. from Pixabay"
+scroll_active = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 325)
@@ -183,3 +253,4 @@ autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureButton3" to="CanvasLayer/TextureButton3" method="_on_pressed"]
